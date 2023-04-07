@@ -1,6 +1,4 @@
 class World {
-
-
     character = new Character();
     level = level1;
     canvas;
