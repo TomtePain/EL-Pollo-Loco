@@ -2,7 +2,7 @@ class Clouds extends MovableObject {
     y = 25;
     width = 500;
     height = 250;
-    x = Math.random() * 500;
+    x = Math.random() * 2500 + 100;
     
     constructor(imagePath) {
         super().loadImg(imagePath);
