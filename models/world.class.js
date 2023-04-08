@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    // statusbar = new Statusbar();
     level = level1;
     canvas;
     ctx;
@@ -12,11 +13,24 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     setWorld() {
         this.character.world = this;
     }
+
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if( this.character.isColliding(enemy) ) {
+                    this.character.hit();
+                }
+            });
+        }, 100);
+    }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -27,6 +41,8 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.statusbar);
+        
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -51,7 +67,7 @@ class World {
 
         MovableObject.draw(this.ctx);
         MovableObject.drawFrame(this.ctx);
-
+        
         if (MovableObject.otherDirection) {
             this.flipImageBack(MovableObject);
         }
