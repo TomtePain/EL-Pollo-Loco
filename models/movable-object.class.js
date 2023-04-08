@@ -62,6 +62,18 @@ class MovableObject {
         this.x -= this.speed;
     }
 
+    statusbarMoveRight() {
+        this.world.level.statusbar.forEach(bar => {
+            bar.x += this.speed;
+        });
+    }
+
+    statusbarMoveLeft() {
+        this.world.level.statusbar.forEach(bar => {
+            bar.x -= this.speed;
+        });
+    }
+
     playAnimations(images) {
         let i = this.currentImage % images.length;
         let path = images[i];

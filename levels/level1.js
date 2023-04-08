@@ -42,7 +42,7 @@ const level1 = new Level(
     ],
 
     [
-        new Statusbar('img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/green/100.png', 100),
-        new Statusbar('img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/green/100.png', 150)
+        new Statusbar('img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/green/100.png', 30, 10),
+        new Statusbar('img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/green/100.png', 30, 30)
     ]
 );
