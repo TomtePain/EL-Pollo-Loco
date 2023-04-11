@@ -65,7 +65,7 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.walking_sound.play();
                 this.otherDirection = false;
-                this.statusbarMoveRight();
+                // this.statusbarMoveRight();
                 // this.world.level.statusbar[0].x += this.speed;
                 // this.world.level.statusbar[1].x += this.speed;
             }
@@ -74,7 +74,7 @@ class Character extends MovableObject {
                 this.moveLeft();
                 this.walking_sound.play();
                 this.otherDirection = true;
-                this.statusbarMoveLeft();
+                // this.statusbarMoveLeft();
                 // this.world.level.statusbar[0].x -= this.speed;
                 // this.world.level.statusbar[1].x -= this.speed;
             }
