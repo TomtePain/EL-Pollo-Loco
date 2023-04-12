@@ -1,13 +1,14 @@
 class World {
     character = new Character();
-    // statusbar = new Statusbar();
+    // canvas.requestFullscreen;
     level = level1;
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
     statusBar = new Statusbar();
-    throwableObjects = [new ThrowableObject]
+    throwableObjects = [];
+    collectedBottle = []; // function schreiben zum befüllen des Arrays!!
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -15,7 +16,7 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.run();
     }
 
     setWorld() {
@@ -23,15 +24,27 @@ class World {
     }
 
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if( this.character.isColliding(enemy) ) {
-                    this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy)
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 100);
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if( this.character.isColliding(enemy) ) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy)
+            }
+        });
+    }
+
+    checkThrowObjects() {
+        if(this.keyboard.d && this.collectedBottle != '') {
+            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bottle);
+        }
     }
 
 
