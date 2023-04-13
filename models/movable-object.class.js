@@ -6,6 +6,16 @@ class MovableObject extends DrawableObject {
     acceleration = 0.5;
     energy = 100;
     lastHit = 0;
+
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
+        
+
+
     
 
     applyGravity() {
@@ -47,20 +57,27 @@ class MovableObject extends DrawableObject {
     }
 
     //Bessere Formel zur Kollisionsberechnung (Genauer)
+    isColliding(MovableObject) {
+        return (this.x + this.width) >= MovableObject.x && this.x <= (MovableObject.x + MovableObject.width) &&
+            (this.y + this.offset.top + this.height) >= MovableObject.y &&
+            (this.y + this.offset.top) <= (MovableObject.y + MovableObject.height) &&
+                MovableObject.onCollisionCourse;
+        // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    }
+
     // isColliding(MovableObject) {
-    //     return (this.x + this.width) >= MovableObject.x && this.x <= (MovableObject.x + MovableObject.width) &&
-    //         (this.y + this.offsetY + this.height) >= MovableObject.y &&
-    //         (this.y + this.offsetY) <= (MovableObject.y + MovableObject.height) &&
-    //             MovableObject.onCollisionCourse;
-    //     // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+    //     return this.x + this.width > MovableObject.x &&
+    //     this.y + this.height > MovableObject.y &&
+    //     this.x < MovableObject.x &&
+    //     this.y < MovableObject.y + MovableObject.height
     // }
 
-    isColliding(MovableObject) {
-        return this.x + this.width > MovableObject.x &&
-        this.y + this.height > MovableObject.y &&
-        this.x < MovableObject.x &&
-        this.y < MovableObject.y + MovableObject.height
-    }
+    // isColliding(MovableObject) { // Mihaiversion
+    //     return this.x + this.width - this.offset.right >= MovableObject.x + MovableObject.offset.left &&
+    //     this.y + this.height - this.offset.bottom > MovableObject.y + MovableObject.offset.top &&
+    //     this.x + this.offset.left < MovableObject.x + MovableObject.width - MovableObject.offset.right &&
+    //     this.y + this.offset.top < MovableObject.y + MovableObject.height - MovableObject.offset.bottom;
+    // }
 
     hit() {
         this.energy -= 5;

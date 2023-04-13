@@ -3,6 +3,12 @@ class Character extends MovableObject {
     height = 320;
     speed = 5;
 
+    offset = {
+        top: 150,
+        left: 20,
+        right: 50,
+        bottom: 165
+    }
 
     Images_Walking = [
         'img_pollo_locco/2_character_pepe/2_walk/W-21.png',
@@ -65,18 +71,12 @@ class Character extends MovableObject {
                 this.moveRight();
                 this.walking_sound.play();
                 this.otherDirection = false;
-                // this.statusbarMoveRight();
-                // this.world.level.statusbar[0].x += this.speed;
-                // this.world.level.statusbar[1].x += this.speed;
             }
 
             if (this.world.keyboard.left && this.x > 0) {
                 this.moveLeft();
                 this.walking_sound.play();
                 this.otherDirection = true;
-                // this.statusbarMoveLeft();
-                // this.world.level.statusbar[0].x -= this.speed;
-                // this.world.level.statusbar[1].x -= this.speed;
             }
 
             if (this.world.keyboard.up && !this.isAboveGround() || this.world.keyboard.space && !this.isAboveGround()) {
