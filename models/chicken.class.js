@@ -8,6 +8,13 @@ class Chicken extends MovableObject {
         'img_pollo_locco/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
         'img_pollo_locco/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];
+
+    offset = {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0
+    }
     
 
     constructor() {

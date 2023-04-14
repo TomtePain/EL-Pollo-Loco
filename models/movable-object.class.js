@@ -53,16 +53,7 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 10;
-    }
-
-    //Bessere Formel zur Kollisionsberechnung (Genauer)
-    isColliding(MovableObject) {
-        return (this.x + this.width) >= MovableObject.x && this.x <= (MovableObject.x + MovableObject.width) &&
-            (this.y + this.offset.top + this.height) >= MovableObject.y &&
-            (this.y + this.offset.top) <= (MovableObject.y + MovableObject.height) &&
-                MovableObject.onCollisionCourse;
-        // Optional: hiermit könnten wir schauen, ob ein Objekt sich in die richtige Richtung bewegt. Nur dann kollidieren wir. Nützlich bei Gegenständen, auf denen man stehen kann.
+        this.speedY = 15; // 10
     }
 
     // isColliding(MovableObject) {
@@ -73,11 +64,44 @@ class MovableObject extends DrawableObject {
     // }
 
     // isColliding(MovableObject) { // Mihaiversion
-    //     return this.x + this.width - this.offset.right >= MovableObject.x + MovableObject.offset.left &&
+    //     return (
+    //     this.x + this.width + this.offset.right > MovableObject.x + MovableObject.offset.left &&
     //     this.y + this.height - this.offset.bottom > MovableObject.y + MovableObject.offset.top &&
     //     this.x + this.offset.left < MovableObject.x + MovableObject.width - MovableObject.offset.right &&
-    //     this.y + this.offset.top < MovableObject.y + MovableObject.height - MovableObject.offset.bottom;
+    //     this.y + this.offset.top < MovableObject.y + MovableObject.height - MovableObject.offset.bottom);
     // }
+
+    isColliding(MovableObject) {
+        return this.isCollidingRight(MovableObject) &&
+        this.isCollidingLeft(MovableObject) &&
+        this.isCollidingBottom(MovableObject) &&
+        this.isCollidingTop(MovableObject)
+
+    }
+
+    isCollidingRight(MovableObject) {
+        return ( 
+            this.x + this.width - this.offset.right + this.offset.left >= MovableObject.x + MovableObject.offset.left
+        )
+    }
+
+    isCollidingLeft(MovableObject) {
+        return ( 
+            this.x + this.offset.left < MovableObject.x + MovableObject.width - MovableObject.offset.right
+        )
+    }
+
+    isCollidingBottom(MovableObject) {
+        return ( 
+            this.y + this.height + this.offset.bottom / 2 > MovableObject.y + MovableObject.offset.top
+        )
+    }
+
+    isCollidingTop(MovableObject) {
+        return ( 
+            this.y + this.offset.top < MovableObject.y + MovableObject.height - MovableObject.offset.bottom
+        )
+    }
 
     hit() {
         this.energy -= 5;

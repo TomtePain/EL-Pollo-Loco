@@ -7,13 +7,6 @@ class DrawableObject {
     height = 150;
     width = 100;
 
-    offset = {
-        top: 100,
-        left: 10,
-        right: 10,
-        bottom: 10
-    }
-
 
     loadImg(path) {
         this.img = new Image();
