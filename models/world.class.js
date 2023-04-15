@@ -32,16 +32,29 @@ class World {
     }
 
     checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            if( this.character.isColliding(enemy) ) {
-                this.character.hit();
-                this.statusBar.setPercentage(this.character.energy)
+        this.level.enemies.forEach((enemy, i) => {
+             if (this.character.isColliding(enemy)) {
+                if (this.character.isAboveGround()) {
+                    this.level.enemies.splice(i, 1);
+                } else  {
+                    this.character.hit();
+                    this.statusBar.setPercentage(this.character.energy) 
+                }
+                
+            }
+        });
+    }
+
+    checkContactFromTop() {
+        this.level.enemies.forEach((enemy, i) => {
+           if (this.character.isColliding(enemy) && this.character.isCollidingBottom(enemy) && this.character.y < 115) {
+                this.level.enemies.splice(i, 1);
             }
         });
     }
 
     checkThrowObjects() {
-        if(this.keyboard.d && this.collectedBottle != '') {
+        if (this.keyboard.d && this.collectedBottle != '') {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
@@ -65,8 +78,8 @@ class World {
 
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        
-        
+
+
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -92,7 +105,7 @@ class World {
         MovableObject.draw(this.ctx);
         MovableObject.drawFrame(this.ctx);
         MovableObject.drawFrameOffset(this.ctx);
-        
+
         if (MovableObject.otherDirection) {
             this.flipImageBack(MovableObject);
         }
