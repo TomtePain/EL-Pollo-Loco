@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     contact = false;
+    life = true;
 
     offset = {
         top: 0,
@@ -29,7 +30,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) { 
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
             return this.y < 115;
@@ -59,6 +60,7 @@ class MovableObject extends DrawableObject {
 
     isColliding(MovableObject) {
         return (
+            (MovableObject.life) &&
             this.isCollidingRight(MovableObject) &&
             this.isCollidingLeft(MovableObject) &&
             this.isCollidingBottom(MovableObject) &&
@@ -98,6 +100,18 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
     }
+
+    killedChicken(enemy , i) {
+        this.life = false;
+        setInterval(() => {
+            enemy.loadImg('img_pollo_locco/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+        }, 1);
+        this.speed = 0;
+        setTimeout(() => {
+               world.level.enemies.splice(i, 1);
+             }, 1000);
+    }
+
 
     isDead() {
         return this.energy == 0;

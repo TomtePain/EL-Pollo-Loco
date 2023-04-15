@@ -9,6 +9,10 @@ class Chicken extends MovableObject {
         'img_pollo_locco/3_enemies_chicken/chicken_normal/1_walk/3_w.png'
     ];
 
+    Images_Dead = [
+        'img_pollo_locco/3_enemies_chicken/chicken_normal/2_dead/dead.png'
+    ];
+
     offset = {
         top: 0,
         left: 0,
@@ -35,6 +39,5 @@ class Chicken extends MovableObject {
             this.playAnimations(this.Images_Walking);
         }, 200);
 
-       
     }
 }

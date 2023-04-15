@@ -35,7 +35,7 @@ class World {
         this.level.enemies.forEach((enemy, i) => {
              if (this.character.isColliding(enemy)) {
                 if (this.character.isAboveGround()) {
-                    this.level.enemies.splice(i, 1);
+                    enemy.killedChicken(enemy, i);                    
                 } else  {
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy) 
@@ -43,6 +43,9 @@ class World {
                 
             }
         });
+    }
+    getIndexOfItem(array, item) {
+        return array.indexOf(item, 0);
     }
 
     checkContactFromTop() {
