@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    flasche = new ThrowableObject();
     // canvas.requestFullscreen;
     level = level1;
     canvas;
@@ -7,7 +8,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new Statusbar();
-    throwableObjects = [];
+    throwableObject = [];
     collectedBottle = []; // function schreiben zum befüllen des Arrays!!
 
     constructor(canvas, keyboard) {
@@ -28,6 +29,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCollisionBottle();
         }, 100);
     }
 
@@ -45,11 +47,23 @@ class World {
         });
     }
 
+    checkCollisionBottle() {
+        this.level.throwableObjects.forEach((bottle, i) => {
+            if(this.character.isColliding(bottle)) {
+                this.throwableObject.push(bottle);
+                world.level.throwableObjects.splice(i, 1);
+            }
+        })
+    }
 
+    // Function muss noch geschrieben werden!!!
+    // 
+    // 
     checkThrowObjects() {
-        if (this.keyboard.d && this.collectedBottle != '') {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(bottle);
+        if (this.keyboard.d && this.throwableObject != '') {
+            // let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            // this.throwableObjects.push(bottle);
+            this.flasche.throw();
         }
     }
 
@@ -70,7 +84,7 @@ class World {
 
 
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.throwableObjects);
+        this.addObjectsToMap(this.level.throwableObjects);
 
 
 
