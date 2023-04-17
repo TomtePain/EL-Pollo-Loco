@@ -34,27 +34,17 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
              if (this.character.isColliding(enemy)) {
-                if (this.character.isAboveGround()) {
-                    enemy.killedChicken(enemy, i);                    
+                if (this.character.jumpOnEnemy() && this.character.fall == true) {
+                    enemy.killedChicken(enemy, i);
+                    this.character.bumpUp();               
                 } else  {
                     this.character.hit();
                     this.statusBar.setPercentage(this.character.energy) 
                 }
-                
             }
         });
-    }
-    getIndexOfItem(array, item) {
-        return array.indexOf(item, 0);
     }
 
-    checkContactFromTop() {
-        this.level.enemies.forEach((enemy, i) => {
-           if (this.character.isColliding(enemy) && this.character.isCollidingBottom(enemy) && this.character.y < 115) {
-                this.level.enemies.splice(i, 1);
-            }
-        });
-    }
 
     checkThrowObjects() {
         if (this.keyboard.d && this.collectedBottle != '') {

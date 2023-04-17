@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     contact = false;
     life = true;
+    fall = false;
 
     offset = {
         top: 0,
@@ -25,8 +26,12 @@ class MovableObject extends DrawableObject {
             if (this.isAboveGround() || this.speedY > 0) {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
+                this.fall = true;
+                if(this.y == 115) {
+                    this.fall = false;
+                }
             }
-        }, 1000 / 60)
+        }, 1000 / 60);
     }
 
     isAboveGround() {
@@ -56,6 +61,10 @@ class MovableObject extends DrawableObject {
 
     jump() {
         this.speedY = 15; // 10
+    }
+
+    bumpUp() {
+        this.speedY = 10;
     }
 
     isColliding(MovableObject) {
@@ -92,6 +101,10 @@ class MovableObject extends DrawableObject {
         )
     }
 
+    jumpOnEnemy() {
+        return this.y - this.ground < 0 && this.speedY < 0;    
+    }
+
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -101,15 +114,16 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    killedChicken(enemy , i) {
+    killedChicken(enemy, i) {
         this.life = false;
         setInterval(() => {
             enemy.loadImg('img_pollo_locco/3_enemies_chicken/chicken_normal/2_dead/dead.png');
         }, 1);
         this.speed = 0;
-        setTimeout(() => {
-               world.level.enemies.splice(i, 1);
-             }, 1000);
+        enemy.chicken_sound.play();
+         setTimeout(() => {
+            world.level.enemies.splice(i, 1);
+         }, 500);
     }
 
 

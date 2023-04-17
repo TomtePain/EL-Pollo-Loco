@@ -2,6 +2,7 @@ class Character extends MovableObject {
     y = 115;
     height = 320;
     speed = 5;
+    ground = 115;
 
     offset = {
         top: 150,
@@ -88,8 +89,6 @@ class Character extends MovableObject {
 
 
         setInterval(() => {
-
-          
 
              if(this.isDead()) {
                 this.playAnimations(this.Images_Dead);
