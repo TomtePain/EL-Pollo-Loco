@@ -42,7 +42,7 @@ let level1 = new Level(
     ],
 
     [
-        new ThrowableObject(450, 375),
+        new SalsaBottle(450 , 375), //450 , 375
     ]
 
 );
