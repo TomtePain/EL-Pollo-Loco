@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    new_bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
     // canvas.requestFullscreen;
     level = level1;
     canvas;
@@ -8,8 +7,10 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new Statusbar();
+    statusForBottle = new Statusbar_Bottle();
     throwableObject_bottle = [];
-    collectedBottle = []; // function schreiben zum befüllen des Arrays!!
+    collectedBottle = [];
+    SalsaBottleCounter = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -35,13 +36,13 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
-             if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy)) {
                 if (this.character.jumpOnEnemy() && this.character.fall == true) {
                     enemy.killedChicken(enemy, i);
-                    this.character.bumpUp();               
-                } else  {
+                    this.character.bumpUp();
+                } else {
                     this.character.hit();
-                    this.statusBar.setPercentage(this.character.energy) 
+                    this.statusBar.setPercentage(this.character.energy)
                 }
             }
         });
@@ -49,20 +50,24 @@ class World {
 
     checkCollisionBottle() {
         this.level.salsaBottle.forEach((bottle, i) => {
-            if(this.character.isColliding(bottle)) {
-                this.throwableObject_bottle.push(bottle);
+            if (this.character.isColliding(bottle)) {
+                this.collectedBottle.push(bottle);
+                this.SalsaBottleCounter++;
                 this.level.salsaBottle.splice(i, 1);
             }
         })
     }
 
-    // Function muss noch geschrieben werden!!!
-    // 
-    // 
     checkThrowObjects() {
-        if (this.keyboard.d) {
+        if (this.keyboard.d && this.collectedBottle != '') {
             let newbottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObject_bottle.push(newbottle);
+            this.collectedBottle.splice(0, 1);
+            if (this.SalsaBottleCounter < 0) {
+                this.SalsaBottleCounter = 0;
+            } else {
+                this.SalsaBottleCounter--;
+            }
         }
     }
 
@@ -79,6 +84,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // Back
         // --- Space for fixed objects
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusForBottle);
         this.ctx.translate(this.camera_x, 0); // Forwards
 
 

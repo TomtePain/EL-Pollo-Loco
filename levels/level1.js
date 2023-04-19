@@ -43,6 +43,7 @@ let level1 = new Level(
 
     [
         new SalsaBottle(450 , 375), //450 , 375
+        new SalsaBottle(350 , 375), 
     ]
 
 );
