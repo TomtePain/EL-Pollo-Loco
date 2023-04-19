@@ -1,6 +1,6 @@
 class Statusbar_Bottle extends DrawableObject {
 
-    width = 140;
+    width = 150;
     height = 40;
 
     Images_Bottle = [
@@ -12,6 +12,9 @@ class Statusbar_Bottle extends DrawableObject {
         'img_pollo_locco/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png'
     ]
 
+    percentage = 0;
+    
+
     constructor() {
         super();
         this.loadImages(this.Images_Bottle);
@@ -20,9 +23,6 @@ class Statusbar_Bottle extends DrawableObject {
         this.setPercentage(0);
     }
 
-    percentage = 100;
-
-
     setPercentage(percentage) {
         this.percentage = percentage;
         let imagePath = this.Images_Bottle[this.resolveImageIndex()];
@@ -30,15 +30,15 @@ class Statusbar_Bottle extends DrawableObject {
     }
 
     resolveImageIndex() {
-        if(this.percentage == 100) {
+        if(this.percentage == 5) {
             return 5;
-        } else if (this.percentage > 80) {
+        } else if (this.percentage >= 4) {
             return 4;
-        } else if (this.percentage > 60) {
+        } else if (this.percentage >= 3) {
             return 3;
-        } else if (this.percentage > 40) {
+        } else if (this.percentage >= 2) {
             return 2;
-        } else if (this.percentage > 20) {
+        } else if (this.percentage >= 1) {
             return 1;
         } else {
             return 0;

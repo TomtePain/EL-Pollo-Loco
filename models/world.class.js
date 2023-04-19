@@ -8,9 +8,11 @@ class World {
     camera_x = 0;
     statusBar = new Statusbar();
     statusForBottle = new Statusbar_Bottle();
+    statusBarCoins = new Statusbar_Coin();
     throwableObject_bottle = [];
     collectedBottle = [];
     SalsaBottleCounter = 0;
+    coinCounter = 0;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -31,6 +33,7 @@ class World {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkCollisionBottle();
+            this.checkCollisionCoins();
         }, 100);
     }
 
@@ -53,7 +56,18 @@ class World {
             if (this.character.isColliding(bottle)) {
                 this.collectedBottle.push(bottle);
                 this.SalsaBottleCounter++;
+                this.statusForBottle.setPercentage(this.SalsaBottleCounter);
                 this.level.salsaBottle.splice(i, 1);
+            }
+        })
+    }
+
+    checkCollisionCoins() {
+        this.level.coin.forEach((coins, i) => {
+            if(this.character.isColliding(coins)) {
+                this.coinCounter++;
+                this.statusBarCoins.setPercentage(this.coinCounter);
+                this.level.coin.splice(i, 1);
             }
         })
     }
@@ -67,6 +81,7 @@ class World {
                 this.SalsaBottleCounter = 0;
             } else {
                 this.SalsaBottleCounter--;
+                this.statusForBottle.setPercentage(this.SalsaBottleCounter);
             }
         }
     }
@@ -85,11 +100,13 @@ class World {
         // --- Space for fixed objects
         this.addToMap(this.statusBar);
         this.addToMap(this.statusForBottle);
+        this.addToMap(this.statusBarCoins);
         this.ctx.translate(this.camera_x, 0); // Forwards
 
 
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.salsaBottle);
+        this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.throwableObject_bottle);
 
 
