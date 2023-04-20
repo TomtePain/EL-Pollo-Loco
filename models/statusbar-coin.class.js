@@ -1,6 +1,5 @@
 class Statusbar_Coin extends DrawableObject {
 
-    counter = document.getElementById('canvas');
 
     width = 150;
     height = 40;

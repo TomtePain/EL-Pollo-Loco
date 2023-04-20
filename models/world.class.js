@@ -7,6 +7,7 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new Statusbar();
+    statusBarEndboss = new Statusbar_Endboss();
     statusForBottle = new Statusbar_Bottle();
     statusBarCoins = new Statusbar_Coin();
     throwableObject_bottle = [];
@@ -101,6 +102,8 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusForBottle);
         this.addToMap(this.statusBarCoins);
+        this.addToMap(this.statusBarEndboss);
+        
         this.ctx.translate(this.camera_x, 0); // Forwards
 
 
