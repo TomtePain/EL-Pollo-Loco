@@ -2,7 +2,10 @@ let level1 = new Level(
     [
         new Chicken(),
         new Chicken(),
-        new Chicken(),
+        new Chicken()
+    ],
+
+    [
         new Endboss()
     ],
 
@@ -49,6 +52,10 @@ let level1 = new Level(
     [
         new Coin(400, 100),
         new Coin(600, 125),
+    ],
+
+    [
+        new Statusbar_Endboss(2450, 20)
     ]
 
 );

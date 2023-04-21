@@ -1,5 +1,6 @@
 class World {
     character = new Character();
+    bigboss = new Endboss();
     // canvas.requestFullscreen;
     level = level1;
     canvas;
@@ -7,7 +8,6 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new Statusbar();
-    statusBarEndboss = new Statusbar_Endboss();
     statusForBottle = new Statusbar_Bottle();
     statusBarCoins = new Statusbar_Coin();
     throwableObject_bottle = [];
@@ -35,6 +35,7 @@ class World {
             this.checkThrowObjects();
             this.checkCollisionBottle();
             this.checkCollisionCoins();
+            this.checkBottleBigBossCollision();
         }, 100);
     }
 
@@ -65,7 +66,7 @@ class World {
 
     checkCollisionCoins() {
         this.level.coin.forEach((coins, i) => {
-            if(this.character.isColliding(coins)) {
+            if (this.character.isColliding(coins)) {
                 this.coinCounter++;
                 this.statusBarCoins.setPercentage(this.coinCounter);
                 this.level.coin.splice(i, 1);
@@ -87,6 +88,14 @@ class World {
         }
     }
 
+    checkBottleBigBossCollision() {
+        this.throwableObject_bottle.forEach((bottle) => {
+            if (this.level.bigBoss[0].isColliding(bottle)) {
+                    console.log('treffer')
+                }
+            })
+    }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -102,15 +111,16 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.statusForBottle);
         this.addToMap(this.statusBarCoins);
-        this.addToMap(this.statusBarEndboss);
-        
+
         this.ctx.translate(this.camera_x, 0); // Forwards
 
 
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.bigBoss);
         this.addObjectsToMap(this.level.salsaBottle);
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.throwableObject_bottle);
+        this.addObjectsToMap(this.level.statusBarEndboss);
 
 
 

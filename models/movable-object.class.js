@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 0.5;
     energy = 100;
+    energyEndboss = 100;
     lastHit = 0;
     contact = false;
     life = true;
@@ -77,6 +78,12 @@ class MovableObject extends DrawableObject {
         );
     }
 
+    collidingBigBoss(MovableObject) {
+        return (
+            this.x + this.width >= MovableObject.x
+        );
+    }
+
     isCollidingRight(MovableObject) {
         return (
             this.x + this.width - this.offset.right + this.offset.left >= MovableObject.x + MovableObject.offset.left
@@ -114,6 +121,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    hitEndboss() {
+        this.energyEndboss -= 20;
+        if (this.energy < 0) {
+            this.energy = 0;}
+    }
+
     killedChicken(enemy, i) {
         this.life = false;
         setInterval(() => {
@@ -126,6 +139,12 @@ class MovableObject extends DrawableObject {
          }, 500);
     }
 
+    bottleContactsEndboss() {
+        this.energyEndboss -= 20;
+        if(this.energyEndboss < 0) {
+            this.energyEndboss = 0;
+        } 
+    }
 
     isDead() {
         return this.energy == 0;
