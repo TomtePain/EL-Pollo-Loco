@@ -14,6 +14,7 @@ class World {
     collectedBottle = [];
     SalsaBottleCounter = 0;
     coinCounter = 0;
+    contact = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -89,11 +90,19 @@ class World {
     }
 
     checkBottleBigBossCollision() {
-        this.throwableObject_bottle.forEach((bottle) => {
-            if (this.level.bigBoss[0].isColliding(bottle)) {
-                    console.log('treffer')
-                }
-            })
+        this.throwableObject_bottle.forEach((bottle, i) => {
+            if (this.level.bigBoss[0].isColliding(bottle) && this.contact == false) {
+                this.contact = true;
+                bottle.splashedBottle = true;
+                this.level.bigBoss[0].hit();
+                bottle.animate();
+                bottle.speedY = 0;
+                setTimeout(() => {
+                    this.throwableObject_bottle.splice(i, 1);
+                    this.contact = false;
+                }, 150)
+            }
+        })
     }
 
 

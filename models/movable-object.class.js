@@ -5,7 +5,6 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 0.5;
     energy = 100;
-    energyEndboss = 100;
     lastHit = 0;
     contact = false;
     life = true;
@@ -28,7 +27,7 @@ class MovableObject extends DrawableObject {
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
                 this.fall = true;
-                if(this.y == 115) {
+                if (this.y == 115) {
                     this.fall = false;
                 }
             }
@@ -78,12 +77,6 @@ class MovableObject extends DrawableObject {
         );
     }
 
-    collidingBigBoss(MovableObject) {
-        return (
-            this.x + this.width >= MovableObject.x
-        );
-    }
-
     isCollidingRight(MovableObject) {
         return (
             this.x + this.width - this.offset.right + this.offset.left >= MovableObject.x + MovableObject.offset.left
@@ -109,22 +102,20 @@ class MovableObject extends DrawableObject {
     }
 
     jumpOnEnemy() {
-        return this.y - this.ground < 0 && this.speedY < 0;    
+        return this.y - this.ground < 0 && this.speedY < 0;
     }
 
     hit() {
-        this.energy -= 5;
+        if (this instanceof Endboss) {
+            this.energy -= 20;
+        } else {
+            this.energy -= 5;
+        }
         if (this.energy < 0) {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
         }
-    }
-
-    hitEndboss() {
-        this.energyEndboss -= 20;
-        if (this.energy < 0) {
-            this.energy = 0;}
     }
 
     killedChicken(enemy, i) {
@@ -134,16 +125,9 @@ class MovableObject extends DrawableObject {
         }, 1);
         this.speed = 0;
         enemy.chicken_sound.play();
-         setTimeout(() => {
+        setTimeout(() => {
             world.level.enemies.splice(i, 1);
-         }, 500);
-    }
-
-    bottleContactsEndboss() {
-        this.energyEndboss -= 20;
-        if(this.energyEndboss < 0) {
-            this.energyEndboss = 0;
-        } 
+        }, 500);
     }
 
     isDead() {
