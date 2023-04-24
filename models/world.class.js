@@ -77,14 +77,17 @@ class World {
 
     checkThrowObjects() {
         if (this.keyboard.d && this.collectedBottle != '') {
-            let newbottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObject_bottle.push(newbottle);
-            this.collectedBottle.splice(0, 1);
-            if (this.SalsaBottleCounter < 0) {
-                this.SalsaBottleCounter = 0;
-            } else {
-                this.SalsaBottleCounter--;
-                this.statusForBottle.setPercentage(this.SalsaBottleCounter);
+            if (keypress == false) {
+                let newbottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+                this.throwableObject_bottle.push(newbottle);
+                this.collectedBottle.splice(0, 1);
+                if (this.SalsaBottleCounter < 0) {
+                    this.SalsaBottleCounter = 0;
+                } else {
+                    this.SalsaBottleCounter--;
+                    this.statusForBottle.setPercentage(this.SalsaBottleCounter);
+                }
+                keypress = true;
             }
         }
     }

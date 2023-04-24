@@ -1,6 +1,8 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let downCounter = 0;
+let keypress = false;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -27,7 +29,7 @@ window.addEventListener("keydown", (e) => {
     if(e.keyCode == 68) {
         keyboard.d = true;
     }
-})
+},false)
 
 window.addEventListener("keyup", (e) => {
     if(e.keyCode == 39) {
@@ -47,5 +49,6 @@ window.addEventListener("keyup", (e) => {
     }
     if(e.keyCode == 68) {
         keyboard.d = false;
+        keypress = false;
     }
 })
