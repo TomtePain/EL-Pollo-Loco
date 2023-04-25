@@ -34,6 +34,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.alertBigBoss();
+            this.checkCollisionBigBoss();
             this.checkThrowObjects();
             this.checkCollisionBottle();
             this.checkCollisionCoins();
@@ -56,12 +57,22 @@ class World {
     }
 
     alertBigBoss() {
-        if(this.character.x + this.character.width == 2000) {
-                console.log('erreicht');
-                this.level.bigBoss[0].moveLeft();
+        if (this.character.x + this.character.width > 2000) {
+            this.level.bigBoss[0].moveLeft();
+            
+            if (this.level.bigBoss[0].x <= 2000) {
+                this.level.bigBoss[0].x = 2000;
             }
         }
-    
+    }
+
+    checkCollisionBigBoss() {
+        if (this.character.isColliding(this.level.bigBoss[0])) {
+            this.character.hit();
+            this.statusBar.setPercentage(this.character.energy)
+        }
+    }
+
 
     checkCollisionBottle() {
         this.level.salsaBottle.forEach((bottle, i) => {

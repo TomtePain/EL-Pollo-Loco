@@ -48,7 +48,7 @@ class MovableObject extends DrawableObject {
     }
 
     moveLeft() {
-        this.x -= this.speed;
+            this.x -= this.speed;
     }
 
 
@@ -106,9 +106,9 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
-        if (this instanceof Endboss) {
+        if(this instanceof Endboss) {
             this.energy -= 20;
-        } else {
+        }else {
             this.energy -= 5;
         }
         if (this.energy < 0) {

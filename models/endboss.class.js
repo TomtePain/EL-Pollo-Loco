@@ -2,7 +2,7 @@ class Endboss extends MovableObject {
     height = 450;
     width = 400;
     y = 15;
-    speed = 20;
+    speed = 10;
 
     Images_Alert = [
         'img_pollo_locco/4_enemie_boss_chicken/2_alert/G5.png',
@@ -33,14 +33,18 @@ class Endboss extends MovableObject {
     animate() {
 
         setInterval(() => {
-            this.playAnimations(this.Images_Alert);
+
+            if(world.character.x + world.character.width > 2000) {
+                this.playAnimations(this.Images_Walking)
+            } else {
+                this.playAnimations(this.Images_Alert);
+            }
+            
+
+
+
         }, 200);
 
-        // setInterval(() => {
-        //     if(this.moveLeft()) {
-        //         this.playAnimations(this.Images_Walking);
-        //     }
-        // }, 200);
     }
 
 
