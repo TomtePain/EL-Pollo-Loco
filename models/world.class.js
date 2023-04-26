@@ -39,6 +39,7 @@ class World {
             this.checkCollisionBottle();
             this.checkCollisionCoins();
             this.checkBottleBigBossCollision();
+            this.checkKilledBigBoss();
         }, 100);
     }
 
@@ -59,9 +60,10 @@ class World {
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000) {
             this.level.bigBoss[0].moveLeft();
-            
+            this.level.statusBarEndboss[0].moveLeft();
             if (this.level.bigBoss[0].x <= 2000) {
                 this.level.bigBoss[0].x = 2000;
+                this.level.statusBarEndboss[0].x = 2000;
             }
         }
     }
@@ -118,14 +120,23 @@ class World {
                 this.contact = true;
                 bottle.splashedBottle = true;
                 this.level.bigBoss[0].hit();
+                this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;
+                
                 setTimeout(() => {
                     this.throwableObject_bottle.splice(i, 1);
                     this.contact = false;
                 }, 150)
+                
             }
         })
+    }
+
+    checkKilledBigBoss() {
+        if(this.level.bigBoss[0].energy <= 0) {
+            this.level.bigBoss[0].isDead();
+        }
     }
 
 

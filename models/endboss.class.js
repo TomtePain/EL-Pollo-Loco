@@ -22,10 +22,24 @@ class Endboss extends MovableObject {
         'img_pollo_locco/4_enemie_boss_chicken/1_walk/G4.png'
     ]
 
+    Images_Hurt = [
+        'img_pollo_locco/4_enemie_boss_chicken/4_hurt/G21.png',
+        'img_pollo_locco/4_enemie_boss_chicken/4_hurt/G22.png',
+        'img_pollo_locco/4_enemie_boss_chicken/4_hurt/G23.png'
+    ]
+
+    Images_Dead = [
+        'img_pollo_locco/4_enemie_boss_chicken/5_dead/G24.png',
+        'img_pollo_locco/4_enemie_boss_chicken/5_dead/G25.png',
+        'img_pollo_locco/4_enemie_boss_chicken/5_dead/G26.png'
+    ]
+
     constructor() {
         super().loadImg('img_pollo_locco/4_enemie_boss_chicken/2_alert/G5.png');
         this.loadImages(this.Images_Alert);
         this.loadImages(this.Images_Walking);
+        this.loadImages(this.Images_Hurt);
+        this.loadImages(this.Images_Dead);
         this.x = 2425;
         this.animate();
     }
@@ -33,18 +47,37 @@ class Endboss extends MovableObject {
     animate() {
 
         setInterval(() => {
-
-            if(world.character.x + world.character.width > 2000) {
-                this.playAnimations(this.Images_Walking)
+            if (world.character.x + world.character.width > 2000) {
+                if (this.isDead()) {
+                    this.animationIsDead();
+                    this.speed = 0;
+                } else if (this.isHurt()) {
+                    this.playAnimations(this.Images_Hurt);
+                } else{
+                    this.playAnimations(this.Images_Walking)
+                }
+            } else if (this.isDead()) {
+                this.animationIsDead();
+            }
+            else if (this.isHurt()) {
+                this.playAnimations(this.Images_Hurt);
             } else {
                 this.playAnimations(this.Images_Alert);
             }
-            
-
-
-
         }, 200);
 
+
+
+    }
+
+    animationIsDead() {
+        setTimeout(() => {
+            if(this.Images_Dead[2]){
+                this.loadImg(this.Images_Dead[2])
+            } else{
+                this.playAnimations(this.Images_Dead);
+            }            
+        }, 100)
     }
 
 

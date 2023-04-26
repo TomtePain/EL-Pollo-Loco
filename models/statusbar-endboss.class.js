@@ -3,6 +3,7 @@ class Statusbar_Endboss extends MovableObject {
     width = 150;
     height = 40;
     y = 5;
+    speed = 10;
 
     Images_Health = [
         'img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png',
