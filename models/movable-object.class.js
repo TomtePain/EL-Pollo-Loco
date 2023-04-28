@@ -105,12 +105,8 @@ class MovableObject extends DrawableObject {
         return this.y - this.ground < 0 && this.speedY < 0;
     }
 
-    hit() {
-        if(this instanceof Endboss) {
-            this.energy -= 50;
-        }else {
-            this.energy -= 5;
-        }
+    hit(value) {
+        this.energy -= value;
         if (this.energy < 0) {
             this.energy = 0;
         } else {

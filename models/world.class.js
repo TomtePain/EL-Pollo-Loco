@@ -34,7 +34,6 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.alertBigBoss();
-            this.checkCollisionBigBoss();
             this.checkThrowObjects();
             this.checkCollisionBottle();
             this.checkCollisionCoins();
@@ -50,7 +49,7 @@ class World {
                     enemy.killedChicken(enemy, i);
                     this.character.bumpUp();
                 } else {
-                    this.character.hit();
+                    this.character.hit(5);
                     this.statusBar.setPercentage(this.character.energy)
                 }
             }
@@ -60,19 +59,22 @@ class World {
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000) {
             this.level.bigBoss[0].moveLeft();
-            this.level.statusBarEndboss[0].x = this.level.bigBoss[0].x;
+            this.level.statusBarBigBoss[0].x = this.level.bigBoss[0].x;
             if (this.level.bigBoss[0].x <= 2000) {
                 this.level.bigBoss[0].x = 2000;
-                this.level.statusBarEndboss[0].x = this.level.bigBoss[0].x;
+                this.level.statusBarBigBoss[0].x = this.level.bigBoss[0].x;
             }
         }
     }
 
-    checkCollisionBigBoss() {
-        if (this.character.isColliding(this.level.bigBoss[0])) {
-            this.character.hit();
-            this.statusBar.setPercentage(this.character.energy)
-        }
+    
+    collisionBigBoss() {
+        this.level.bigBoss[0].speed = 0;
+        world.character.hit(10);
+        world.statusBar.setPercentage(this.character.energy);
+        setTimeout(() => {
+            this.level.bigBoss[0].speed = 10;
+        }, 1000);
     }
 
 
@@ -119,23 +121,22 @@ class World {
             if (this.level.bigBoss[0].isColliding(bottle) && this.contact == false) {
                 this.contact = true;
                 bottle.splashedBottle = true;
-                this.level.bigBoss[0].hit();
-                // this.level.bigBoss[0].setPercentage(this.level.bigBoss[0].energy);
+                this.level.bigBoss[0].hit(20);
                 this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;
-                
+
                 setTimeout(() => {
                     this.throwableObject_bottle.splice(i, 1);
                     this.contact = false;
-                }, 150)
-                
+                }, 150);
             }
+            this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
         })
     }
 
     checkKilledBigBoss() {
-        if(this.level.bigBoss[0].energy <= 0) {
+        if (this.level.bigBoss[0].energy <= 0) {
             this.level.bigBoss[0].isDead();
         }
     }
@@ -164,7 +165,7 @@ class World {
         this.addObjectsToMap(this.level.salsaBottle);
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.throwableObject_bottle);
-        this.addObjectsToMap(this.level.statusBarEndboss);
+        this.addObjectsToMap(this.level.statusBarBigBoss);
 
 
 

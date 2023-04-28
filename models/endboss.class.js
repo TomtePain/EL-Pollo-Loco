@@ -67,31 +67,18 @@ class Endboss extends MovableObject {
 
         setInterval(() => {
             if (world.character.x + world.character.width > 2000) {
-                if (this.isDead()) {
-                    this.animationIsDead();
-                    this.speed = 0;
-                } else if (this.isHurt()) {
-                    this.playAnimations(this.Images_Hurt);
-                }else if(this.isColliding(world.character)) {
-                    console.log('treffer')
-                    this.playAnimations(this.Images_Attack)
-                }else{
-                    this.playAnimations(this.Images_Walking)
-                }
+                this.animationRequestOnWalk();
             } else if (this.isDead()) {
                 this.animationIsDead();
             }else if (this.isHurt()) {
                 this.playAnimations(this.Images_Hurt);
             }else if(this.isColliding(world.character)) {
-                console.log('treffer')
                 this.playAnimations(this.Images_Attack);
+                world.collisionBigBoss();
             } else {
                 this.playAnimations(this.Images_Alert);
             }
         }, 200);
-
-
-
     }
 
     animationIsDead() {
@@ -102,6 +89,20 @@ class Endboss extends MovableObject {
                 this.playAnimations(this.Images_Dead);
             }            
         }, 100)
+    }
+
+    animationRequestOnWalk() {
+        if (this.isDead()) {
+            this.animationIsDead();
+            this.speed = 0;
+        } else if (this.isHurt()) {
+            this.playAnimations(this.Images_Hurt);
+        }else if(this.isColliding(world.character)) {
+            this.playAnimations(this.Images_Attack);
+            world.collisionBigBoss();
+        }else{
+            this.playAnimations(this.Images_Walking)
+        }
     }
 
 
