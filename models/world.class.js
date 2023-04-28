@@ -60,10 +60,10 @@ class World {
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000) {
             this.level.bigBoss[0].moveLeft();
-            this.level.statusBarEndboss[0].moveLeft();
+            this.level.statusBarEndboss[0].x = this.level.bigBoss[0].x;
             if (this.level.bigBoss[0].x <= 2000) {
                 this.level.bigBoss[0].x = 2000;
-                this.level.statusBarEndboss[0].x = 2000;
+                this.level.statusBarEndboss[0].x = this.level.bigBoss[0].x;
             }
         }
     }
@@ -120,6 +120,7 @@ class World {
                 this.contact = true;
                 bottle.splashedBottle = true;
                 this.level.bigBoss[0].hit();
+                // this.level.bigBoss[0].setPercentage(this.level.bigBoss[0].energy);
                 this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;
