@@ -5,12 +5,14 @@ class Statusbar_Endboss extends MovableObject {
     y = 5;
     speed = 10;
 
+
+    // for selfmade Images = height= 145, y = 4
     Images_Health = [
-        'img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/orange/0.png',
-        'img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/orange/20.png',
-        'img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/orange/40.png',
-        'img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/orange/60.png',
-        'img_pollo_locco/7_statusbars/1_statusbar/2_statusbar_health/orange/80.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/0.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/20.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/40.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/60.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/80new.png',
         'img_pollo_locco/7_statusbars/2_statusbar_endboss/orange.png',
     ];
 
