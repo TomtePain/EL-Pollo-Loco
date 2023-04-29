@@ -46,10 +46,9 @@ class World {
 
     checkTimeToIdle() {
         timeForIdle = new Date().getSeconds();
-        let sflködskfaö = new Date(timeForIdle - timepassed)
-        if(sflködskfaö > 5){
+        let idleTime = new Date(timeForIdle - timepassed)
+        if(idleTime > 5){
             this.idle = true;
-            console.log('idleTime!!!');
         }else {
             this.idle = false;
         }
