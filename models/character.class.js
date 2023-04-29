@@ -3,6 +3,8 @@ class Character extends MovableObject {
     height = 320;
     speed = 5;
     ground = 115;
+    // timepassed = new Date();
+    // timeForIdle = new Date(this.timepassed);
 
     offset = {
         top: 150,
@@ -10,6 +12,32 @@ class Character extends MovableObject {
         right: 50,
         bottom: 165
     }
+
+    Images_Idle = [
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-1.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-2.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-3.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-4.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-5.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-6.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-7.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-8.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-9.png',
+        'img_pollo_locco/2_character_pepe/1_idle/idle/I-10.png'
+    ]
+
+    Images_Sleep = [
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img_pollo_locco/2_character_pepe/1_idle/long_idle/I-20.png'
+    ]
 
     Images_Walking = [
         'img_pollo_locco/2_character_pepe/2_walk/W-21.png',
@@ -55,6 +83,8 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImg('img_pollo_locco/2_character_pepe/2_walk/W-21.png');
+        this.loadImages(this.Images_Idle);
+        this.loadImages(this.Images_Sleep);
         this.loadImages(this.Images_Walking);
         this.loadImages(this.Images_Jumping);
         this.loadImages(this.Images_Hurt);
@@ -67,7 +97,7 @@ class Character extends MovableObject {
 
         setInterval(() => {
             this.walking_sound.pause();
-            
+
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
@@ -81,7 +111,7 @@ class Character extends MovableObject {
             }
 
             if (this.world.keyboard.up && !this.isAboveGround() || this.world.keyboard.space && !this.isAboveGround()) {
-                    this.jump();
+                this.jump();
             }
 
             this.world.camera_x = -this.x + 100;
@@ -90,21 +120,30 @@ class Character extends MovableObject {
 
         setInterval(() => {
 
-             if(this.isDead()) {
+            if (this.isDead()) {
                 this.playAnimations(this.Images_Dead);
-            } 
-            else if(this.isHurt()) {
+            }
+            else if (this.isHurt()) {
                 this.playAnimations(this.Images_Hurt);
             }
 
             else if (this.isAboveGround()) {
                 this.playAnimations(this.Images_Jumping);
-            } else {
+            }
+            else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
                     this.playAnimations(this.Images_Walking);
+                } else if (this.isIdle()) {
+                    this.playAnimations(this.Images_Sleep);
+                } else {
+                    this.playAnimations(this.Images_Idle);
                 }
             }
-        }, 100);   
+        }, 100);
+    }
+
+    isIdle() {
+        return this.world.idle == true
     }
 
 }

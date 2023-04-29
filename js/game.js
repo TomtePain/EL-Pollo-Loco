@@ -3,6 +3,8 @@ let world;
 let keyboard = new Keyboard();
 let downCounter = 0;
 let keypress = false;
+let timepassed;
+let timeForIdle;
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -13,21 +15,27 @@ function init() {
 window.addEventListener("keydown", (e) => {
     if(e.keyCode == 39) {
         keyboard.right = true;
+        timepassed = new Date().getSeconds();
     }
     if(e.keyCode == 37) {
         keyboard.left = true;
+        timepassed = new Date().getSeconds();
     }
     if(e.keyCode == 38) {
         keyboard.up = true;
+        timepassed = new Date().getSeconds();
     }
     if(e.keyCode == 40) {
         keyboard.down = true;
+        timepassed = new Date().getSeconds();
     }
     if(e.keyCode == 32) {
         keyboard.space = true;
+        timepassed = new Date().getSeconds();
     }
     if(e.keyCode == 68) {
         keyboard.d = true;
+        timepassed = new Date().getSeconds();
     }
 },false)
 

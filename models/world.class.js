@@ -15,6 +15,7 @@ class World {
     SalsaBottleCounter = 0;
     coinCounter = 0;
     contact = false;
+    idle;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -32,6 +33,7 @@ class World {
 
     run() {
         setInterval(() => {
+            this.checkTimeToIdle();
             this.checkCollisions();
             this.alertBigBoss();
             this.checkThrowObjects();
@@ -40,6 +42,17 @@ class World {
             this.checkBottleBigBossCollision();
             this.checkKilledBigBoss();
         }, 100);
+    }
+
+    checkTimeToIdle() {
+        timeForIdle = new Date().getSeconds();
+        let sflködskfaö = new Date(timeForIdle - timepassed)
+        if(sflködskfaö > 5){
+            this.idle = true;
+            console.log('idleTime!!!');
+        }else {
+            this.idle = false;
+        }
     }
 
     checkCollisions() {
