@@ -57,7 +57,7 @@ class World {
     }
 
     alertBigBoss() {
-        if (this.character.x + this.character.width > 2000) {
+        if (this.character.x + this.character.width > 2000 && this.level.bigBoss[0].life == true) {
             this.level.bigBoss[0].moveLeft();
             this.level.statusBarBigBoss[0].x = this.level.bigBoss[0].x;
             if (this.level.bigBoss[0].x <= 2000) {

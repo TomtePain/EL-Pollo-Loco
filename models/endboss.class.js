@@ -82,9 +82,17 @@ class Endboss extends MovableObject {
     }
 
     animationIsDead() {
+        this.life = false;
         setTimeout(() => {
             if(this.Images_Dead[2]){
-                this.loadImg(this.Images_Dead[2])
+                this.loadImg(this.Images_Dead[2]);
+                world.level.statusBarBigBoss.splice(0, 1)
+                setTimeout(() => {
+                    this.width = 80;
+                    this.height = 80;
+                    this.y = 350;
+                }, 200);
+
             } else{
                 this.playAnimations(this.Images_Dead);
             }            

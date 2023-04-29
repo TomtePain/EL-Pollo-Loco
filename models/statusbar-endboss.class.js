@@ -1,7 +1,4 @@
 class Statusbar_Endboss extends MovableObject {
-
-    width = 150;
-    height = 40;
     y = 5;
     speed = 10;
 
@@ -12,18 +9,18 @@ class Statusbar_Endboss extends MovableObject {
         'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/20.png',
         'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/40.png',
         'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/60.png',
-        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/80new.png',
-        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orange.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/80.png',
+        'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/100.png',
     ];
 
     percentage = 100;
 
     constructor(x, y) {
-        super().loadImg('img_pollo_locco/7_statusbars/2_statusbar_endboss/orange.png');
+        super().loadImg('img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/100.png');
         this.x = x;
         this.y = y;
-        this.height = 40;
-        this.width = 150;
+        this.height = 145;
+        this.width = 180;
         this.loadImages(this.Images_Health);
         this.setPercentage(100);
     }

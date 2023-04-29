@@ -47,6 +47,9 @@ let level1 = new Level(
     [
         new SalsaBottle(450 , 375), //450 , 375
         new SalsaBottle(350 , 375), 
+        new SalsaBottle(550 , 375), 
+        new SalsaBottle(950 , 375), 
+        new SalsaBottle(1250 , 375), 
     ],
 
     [
@@ -55,7 +58,7 @@ let level1 = new Level(
     ],
 
     [
-        new Statusbar_Endboss(2450, 20)
+        new Statusbar_Endboss(2450, -5)
     ]
 
 );
