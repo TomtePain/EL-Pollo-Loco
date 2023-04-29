@@ -3,8 +3,6 @@ class Character extends MovableObject {
     height = 320;
     speed = 5;
     ground = 115;
-    // timepassed = new Date();
-    // timeForIdle = new Date(this.timepassed);
 
     offset = {
         top: 150,
@@ -133,17 +131,31 @@ class Character extends MovableObject {
             else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
                     this.playAnimations(this.Images_Walking);
+                } //else if (this.isIdle()) {
+                //     this.playAnimations(this.Images_Sleep);
+                // } else {
+                //     this.playAnimations(this.Images_Idle);
+                // }
+            }
+        }, 100);
+
+        setInterval(() => {
+            if (this.isDead() || this.isHurt() || this.isAboveGround()) {}
+            else {
+                if (this.world.keyboard.right || this.world.keyboard.left) {
                 } else if (this.isIdle()) {
                     this.playAnimations(this.Images_Sleep);
-                } else {
+                }
+                else {
                     this.playAnimations(this.Images_Idle);
                 }
             }
-        }, 100);
+        }, 200);
     }
 
     isIdle() {
         return this.world.idle == true
     }
+
 
 }
