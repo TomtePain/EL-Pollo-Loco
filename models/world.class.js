@@ -16,6 +16,7 @@ class World {
     coinCounter = 0;
     contact = false;
     idle;
+    friedChicken = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -41,6 +42,7 @@ class World {
             this.checkCollisionCoins();
             this.checkBottleBigBossCollision();
             this.checkKilledBigBoss();
+            this.collisionKilledBigBoss();
         }, 100);
     }
 
@@ -153,6 +155,14 @@ class World {
         }
     }
 
+    collisionKilledBigBoss() {
+        if(this.character.isCollidingFriedBigBoss(this.level.bigBoss[0]) && this.level.bigBoss[0].isDead()){
+            this.friedChicken = true;
+            this.character.energy = 100;
+            this.statusBar.setPercentage(this.character.energy);
+        }
+    }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -203,8 +213,8 @@ class World {
         }
 
         MovableObject.draw(this.ctx);
-        MovableObject.drawFrame(this.ctx);
-        MovableObject.drawFrameOffset(this.ctx);
+        // MovableObject.drawFrame(this.ctx);
+        // MovableObject.drawFrameOffset(this.ctx);
 
         if (MovableObject.otherDirection) {
             this.flipImageBack(MovableObject);

@@ -9,6 +9,7 @@ class MovableObject extends DrawableObject {
     contact = false;
     life = true;
     fall = false;
+    moving = true;
 
     offset = {
         top: 0,
@@ -48,7 +49,7 @@ class MovableObject extends DrawableObject {
     }
 
     moveLeft() {
-            this.x -= this.speed;
+        this.x -= this.speed;
     }
 
 
@@ -60,7 +61,9 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 15; // 10
+        if (this.moving == true) {
+            this.speedY = 15; // 10
+        }
     }
 
     bumpUp() {
@@ -75,6 +78,13 @@ class MovableObject extends DrawableObject {
             this.isCollidingBottom(MovableObject) &&
             this.isCollidingTop(MovableObject)
         );
+    }
+
+    isCollidingFriedBigBoss(MovableObject) {
+        return this.x + this.width > MovableObject.x &&
+            this.y + this.height > MovableObject.y &&
+            this.x < MovableObject.x &&
+            this.y < MovableObject.y + MovableObject.height
     }
 
     isCollidingRight(MovableObject) {

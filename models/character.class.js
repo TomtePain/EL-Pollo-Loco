@@ -97,19 +97,25 @@ class Character extends MovableObject {
             this.walking_sound.pause();
 
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
-                this.moveRight();
+                if(this.moving == true){
+                    this.moveRight();
                 this.walking_sound.play();
                 this.otherDirection = false;
+                }
             }
 
             if (this.world.keyboard.left && this.x > 0) {
-                this.moveLeft();
+                if(this.moving == true) {
+                    this.moveLeft();
                 this.walking_sound.play();
                 this.otherDirection = true;
+                }
             }
 
             if (this.world.keyboard.up && !this.isAboveGround() || this.world.keyboard.space && !this.isAboveGround()) {
-                this.jump();
+                if(this.moving == true){
+                    this.jump();
+                }
             }
 
             this.world.camera_x = -this.x + 100;
@@ -130,12 +136,9 @@ class Character extends MovableObject {
             }
             else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
+                    if(this.moving == true)
                     this.playAnimations(this.Images_Walking);
-                } //else if (this.isIdle()) {
-                //     this.playAnimations(this.Images_Sleep);
-                // } else {
-                //     this.playAnimations(this.Images_Idle);
-                // }
+                }
             }
         }, 100);
 
@@ -143,7 +146,12 @@ class Character extends MovableObject {
             if (this.isDead() || this.isHurt() || this.isAboveGround()) {}
             else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
-                } else if (this.isIdle()) {
+                } 
+                else if(this.world.friedChicken == true) {
+                    this.loadImg(this.Images_Jumping[3]);
+                    this.moving = false;
+                }
+                else if (this.isIdle()) {
                     this.playAnimations(this.Images_Sleep);
                 }
                 else {
