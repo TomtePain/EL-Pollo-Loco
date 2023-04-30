@@ -17,6 +17,7 @@ class World {
     contact = false;
     idle;
     friedChicken = false;
+    splashedBottle = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -43,15 +44,16 @@ class World {
             this.checkBottleBigBossCollision();
             this.checkKilledBigBoss();
             this.collisionKilledBigBoss();
+            // this.checkBottleOnGround();
         }, 100);
     }
 
     checkTimeToIdle() {
         timeForIdle = new Date().getSeconds();
         let idleTime = new Date(timeForIdle - timepassed)
-        if(idleTime > 5){
+        if (idleTime > 5) {
             this.idle = true;
-        }else {
+        } else {
             this.idle = false;
         }
     }
@@ -81,7 +83,7 @@ class World {
         }
     }
 
-    
+
     collisionBigBoss() {
         this.level.bigBoss[0].speed = 0;
         world.character.hit(10);
@@ -139,13 +141,16 @@ class World {
                 this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;
+                if (this.level.bigBoss[0].energy > 0) {
+                    this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
+                }
 
                 setTimeout(() => {
                     this.throwableObject_bottle.splice(i, 1);
                     this.contact = false;
                 }, 150);
             }
-            this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
+            // this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
         })
     }
 
@@ -156,11 +161,29 @@ class World {
     }
 
     collisionKilledBigBoss() {
-        if(this.character.isCollidingFriedBigBoss(this.level.bigBoss[0]) && this.level.bigBoss[0].isDead()){
+        if (this.character.isCollidingFriedBigBoss(this.level.bigBoss[0]) && this.level.bigBoss[0].isDead()) {
             this.friedChicken = true;
             this.character.energy = 100;
             this.statusBar.setPercentage(this.character.energy);
         }
+    }
+
+    checkBottleOnGround() {
+        this.throwableObject_bottle.forEach((bottle, i) => {
+            if (bottle.y >= 360) {
+                // this.splashedBottle = true;
+                setInterval(() => {
+                    bottle.playAnimations(bottle.Images_Splashed);
+                }, 20);
+                bottle.x -= 10;
+                if (bottle.Images_Splashed[5]) {
+                    
+                    // setTimeout(() => {
+                    //     this.throwableObject_bottle.splice(i, 1)
+                    // }, 150)
+                }
+            }
+        })
     }
 
 

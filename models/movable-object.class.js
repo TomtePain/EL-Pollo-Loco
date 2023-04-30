@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
     life = true;
     fall = false;
     moving = true;
+    ground = 115;
 
     offset = {
         top: 0,
@@ -37,7 +38,8 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         if (this instanceof ThrowableObject) {
-            return true;
+            return (true,
+                this.y < 360)
         } else {
             return this.y < 115;
         }

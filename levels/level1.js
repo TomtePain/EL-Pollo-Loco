@@ -45,11 +45,13 @@ let level1 = new Level(
     ],
 
     [
-        new SalsaBottle(450 , 375), //450 , 375
-        new SalsaBottle(350 , 375), 
-        new SalsaBottle(550 , 375), 
-        new SalsaBottle(950 , 375), 
-        new SalsaBottle(1250 , 375), 
+        new SalsaBottle(200, 360),         
+        new SalsaBottle(250 , 360),
+        new SalsaBottle(350 , 360),
+        new SalsaBottle(450 , 360), //450 , 375
+        new SalsaBottle(550 , 360), 
+        new SalsaBottle(950 , 360), 
+        new SalsaBottle(1250 , 360),
     ],
 
     [
