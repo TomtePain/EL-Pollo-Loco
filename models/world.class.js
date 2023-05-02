@@ -157,29 +157,13 @@ class World {
     }
 
     checkBottleOnGround() {
-        this.throwableObject_bottle.forEach((bottle, i) => {
+        this.throwableObject_bottle.forEach((bottle) => {
             if(bottle.y >= 360) {
-                console.log('bottleOnGround!')
                 this.bottleOnGround = true;
-                bottle.x -= 8;
-                console.log('bottleOnGround = true')
-                if(bottle.y <= 340 && bottle.y >= 359){
-                    
-                    bottle.animate();
-                }
             } else {
                 this.bottleOnGround = false;
-                console.log('bottleOnGround = false')
             };
-            if(this.bottleOnGround == true) {
-                setTimeout(() => {
-                   this.throwableObject_bottle.splice(i, 1); 
-                }, 500)
-                
-    
-            }
         })
-        this.bottleOnGround = false;
     }
 
     checkKilledBigBoss() {

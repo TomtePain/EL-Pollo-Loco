@@ -38,14 +38,13 @@ class ThrowableObject extends MovableObject {
                 this.playAnimations(this.Images_Rotation);
             }
             this.x += 8;
-            // if(this.y >= 360) {
-            //     console.log('bottleOnGround!')
-            //     world.bottleOnGround = true;
-            //     this.playAnimations(this.Images_Splashed);
-            //     this.x -= 8;
-            // } else {
-            //     world.bottleOnGround = false;
-            // };
+            if(this.y >= 360) {
+                world.bottleOnGround = true;
+                this.loadImg(this.Images_Splashed[4])
+                this.x -= 8;
+            } else {
+                world.bottleOnGround = false;
+            };
         }, 30);
     }
 
