@@ -18,6 +18,7 @@ class World {
     idle;
     friedChicken = false;
     splashedBottle = false;
+    bottleOnGround = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -44,7 +45,7 @@ class World {
             this.checkBottleBigBossCollision();
             this.checkKilledBigBoss();
             this.collisionKilledBigBoss();
-            // this.checkBottleOnGround();
+            this.checkBottleOnGround();
         }, 100);
     }
 
@@ -150,8 +151,35 @@ class World {
                     this.contact = false;
                 }, 150);
             }
+            
             // this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
         })
+    }
+
+    checkBottleOnGround() {
+        this.throwableObject_bottle.forEach((bottle, i) => {
+            if(bottle.y >= 360) {
+                console.log('bottleOnGround!')
+                this.bottleOnGround = true;
+                bottle.x -= 8;
+                console.log('bottleOnGround = true')
+                if(bottle.y <= 340 && bottle.y >= 359){
+                    
+                    bottle.animate();
+                }
+            } else {
+                this.bottleOnGround = false;
+                console.log('bottleOnGround = false')
+            };
+            if(this.bottleOnGround == true) {
+                setTimeout(() => {
+                   this.throwableObject_bottle.splice(i, 1); 
+                }, 500)
+                
+    
+            }
+        })
+        this.bottleOnGround = false;
     }
 
     checkKilledBigBoss() {
@@ -166,24 +194,6 @@ class World {
             this.character.energy = 100;
             this.statusBar.setPercentage(this.character.energy);
         }
-    }
-
-    checkBottleOnGround() {
-        this.throwableObject_bottle.forEach((bottle, i) => {
-            if (bottle.y >= 360) {
-                // this.splashedBottle = true;
-                setInterval(() => {
-                    bottle.playAnimations(bottle.Images_Splashed);
-                }, 20);
-                bottle.x -= 10;
-                if (bottle.Images_Splashed[5]) {
-                    
-                    // setTimeout(() => {
-                    //     this.throwableObject_bottle.splice(i, 1)
-                    // }, 150)
-                }
-            }
-        })
     }
 
 

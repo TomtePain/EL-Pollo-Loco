@@ -30,6 +30,7 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
+        world.bottleOnGround = false;
         this.speedY = 10;
         this.applyGravity();
         setInterval(() => {
@@ -37,18 +38,14 @@ class ThrowableObject extends MovableObject {
                 this.playAnimations(this.Images_Rotation);
             }
             this.x += 8;
-            if(this.y >= 360) {
-                console.log('bottleOnGround!')
-                // world.splashedBottle = true;
-                this.playAnimations(this.Images_Splashed);
-                this.x -= 8;
-                if(this.Images_Splashed[5]){
-                    world.throwableObject_bottle.forEach((bottle, i) => {
-                        world.throwableObject_bottle.splice(bottle, i) 
-                        // hier muss dran gearbeitet werden!
-                    })
-                }
-            };
+            // if(this.y >= 360) {
+            //     console.log('bottleOnGround!')
+            //     world.bottleOnGround = true;
+            //     this.playAnimations(this.Images_Splashed);
+            //     this.x -= 8;
+            // } else {
+            //     world.bottleOnGround = false;
+            // };
         }, 30);
     }
 
