@@ -149,10 +149,5 @@ class MovableObject extends DrawableObject {
     }
 
     // Work in Progress
-    dropItem(enemy, i) {
-        if(enemy.life == false) {
-            healthyHeart = new HealthyHeart(enemy.x)
-            world.item.push(healthyHeart);
-        }
-    }
+    
 }

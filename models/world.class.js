@@ -21,6 +21,7 @@ class World {
     splashedBottle = false;
     bottleOnGround = false;
 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -47,6 +48,7 @@ class World {
             this.checkKilledBigBoss();
             this.collisionKilledBigBoss();
             this.checkBottleOnGround();
+            this.collisionDrops();
         }, 100);
     }
 
@@ -66,7 +68,7 @@ class World {
                 if (this.character.jumpOnEnemy() && this.character.fall == true) {
                     enemy.killedChicken(enemy, i);
                     this.character.bumpUp();
-                    this.character.dropItem(enemy, i);
+                    this.dropItem(enemy);
                 } else {
                     this.character.hit(5);
                     this.statusBar.setPercentage(this.character.energy);
@@ -74,6 +76,36 @@ class World {
             };
         });
     };
+
+    // Work in Progress
+    dropItem(enemy) {
+        let healthyHeart = new HealthyHeart(enemy.x);
+        let salsa = new SalsaBottle(enemy.x, 360);
+        let dropList = [healthyHeart, salsa];
+        let drops = dropList[Math.floor(Math.random() * dropList.length)];
+        this.items.push(drops);
+        this.collisionDrops(salsa, healthyHeart);
+    };
+ // Work in Progress
+    collisionDrops(salsa, healthyHeart) {
+        this.items.forEach((drop, i) => {
+            if (this.character.isColliding(drop) && drop == salsa) {
+                console.log('bottle dropped');
+                this.collectedBottle.push(drop);
+                this.SalsaBottleCounter++;
+                this.statusForBottle.setPercentage(this.SalsaBottleCounter);
+                this.items.splice(i, 1);
+            } else if (this.character.isColliding(drop) && drop == healthyHeart) {
+                console.log('live dropped');
+                this.character.energy += 10;
+                this.statusBar.setPercentage(this.character.energy);
+            }
+            if (this.character.x >= drop.x) {
+                this.items.splice(i, 1);
+            }
+        })
+    }
+
 
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000 && this.level.bigBoss[0].life == true) {
@@ -163,9 +195,9 @@ class World {
                 this.bottleOnGround = false;
             };
             if (this.character.x > bottle.x) {
-                setTimeout(() => {
-                    this.throwableObject_bottle.splice(i, 1)
-                }, 200);
+                // setTimeout(() => {
+                this.throwableObject_bottle.splice(i, 1)
+                // }, 200);
             }
         })
     }
@@ -209,6 +241,7 @@ class World {
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.throwableObject_bottle);
         this.addObjectsToMap(this.level.statusBarBigBoss);
+        this.addObjectsToMap(this.items);
 
 
 
