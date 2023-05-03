@@ -1,5 +1,4 @@
 class ThrowableObject extends MovableObject {
-    // splashedBottle = false;
 
     Images_Splashed = [
         'img_pollo_locco/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
@@ -40,7 +39,7 @@ class ThrowableObject extends MovableObject {
             this.x += 8;
             if(this.y >= 360) {
                 world.bottleOnGround = true;
-                this.loadImg(this.Images_Splashed[4])
+                this.loadImg(this.Images_Splashed[4]);
                 this.x -= 8;
             } else {
                 world.bottleOnGround = false;

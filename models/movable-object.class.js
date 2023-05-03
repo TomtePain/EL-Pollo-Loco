@@ -147,4 +147,12 @@ class MovableObject extends DrawableObject {
         timepass = timepass / 1000;
         return timepass < 0.5;
     }
+
+    // Work in Progress
+    dropItem(enemy, i) {
+        if(enemy.life == false) {
+            healthyHeart = new HealthyHeart(enemy.x)
+            world.item.push(healthyHeart);
+        }
+    }
 }

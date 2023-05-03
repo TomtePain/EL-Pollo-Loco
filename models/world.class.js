@@ -12,6 +12,7 @@ class World {
     statusBarCoins = new Statusbar_Coin();
     throwableObject_bottle = [];
     collectedBottle = [];
+    items = [];
     SalsaBottleCounter = 0;
     coinCounter = 0;
     contact = false;
@@ -65,13 +66,14 @@ class World {
                 if (this.character.jumpOnEnemy() && this.character.fall == true) {
                     enemy.killedChicken(enemy, i);
                     this.character.bumpUp();
+                    this.character.dropItem(enemy, i);
                 } else {
                     this.character.hit(5);
-                    this.statusBar.setPercentage(this.character.energy)
-                }
-            }
+                    this.statusBar.setPercentage(this.character.energy);
+                };
+            };
         });
-    }
+    };
 
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000 && this.level.bigBoss[0].life == true) {
@@ -80,19 +82,19 @@ class World {
             if (this.level.bigBoss[0].x <= 2000) {
                 this.level.bigBoss[0].x = 2000;
                 this.level.statusBarBigBoss[0].x = this.level.bigBoss[0].x;
-            }
-        }
-    }
+            };
+        };
+    };
 
 
     collisionBigBoss() {
         this.level.bigBoss[0].speed = 0;
-        world.character.hit(10);
-        world.statusBar.setPercentage(this.character.energy);
+        this.character.hit(10);
+        this.statusBar.setPercentage(this.character.energy);
         setTimeout(() => {
             this.level.bigBoss[0].speed = 10;
         }, 1000);
-    }
+    };
 
 
     checkCollisionBottle() {
@@ -102,9 +104,9 @@ class World {
                 this.SalsaBottleCounter++;
                 this.statusForBottle.setPercentage(this.SalsaBottleCounter);
                 this.level.salsaBottle.splice(i, 1);
-            }
-        })
-    }
+            };
+        });
+    };
 
     checkCollisionCoins() {
         this.level.coin.forEach((coins, i) => {
@@ -112,9 +114,9 @@ class World {
                 this.coinCounter++;
                 this.statusBarCoins.setPercentage(this.coinCounter);
                 this.level.coin.splice(i, 1);
-            }
-        })
-    }
+            };
+        });
+    };
 
     checkThrowObjects() {
         if (this.keyboard.d && this.collectedBottle != '') {
@@ -127,11 +129,11 @@ class World {
                 } else {
                     this.SalsaBottleCounter--;
                     this.statusForBottle.setPercentage(this.SalsaBottleCounter);
-                }
+                };
                 keypress = true;
-            }
-        }
-    }
+            };
+        };
+    };
 
     checkBottleBigBossCollision() {
         this.throwableObject_bottle.forEach((bottle, i) => {
@@ -145,24 +147,26 @@ class World {
                 if (this.level.bigBoss[0].energy > 0) {
                     this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
                 }
-
                 setTimeout(() => {
                     this.throwableObject_bottle.splice(i, 1);
                     this.contact = false;
                 }, 150);
             }
-            
-            // this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
         })
     }
 
     checkBottleOnGround() {
-        this.throwableObject_bottle.forEach((bottle) => {
-            if(bottle.y >= 360) {
+        this.throwableObject_bottle.forEach((bottle, i) => {
+            if (bottle.y >= 360) {
                 this.bottleOnGround = true;
             } else {
                 this.bottleOnGround = false;
             };
+            if (this.character.x > bottle.x) {
+                setTimeout(() => {
+                    this.throwableObject_bottle.splice(i, 1)
+                }, 200);
+            }
         })
     }
 
