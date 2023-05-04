@@ -147,7 +147,5 @@ class MovableObject extends DrawableObject {
         timepass = timepass / 1000;
         return timepass < 0.5;
     }
-
-    // Work in Progress
     
 }

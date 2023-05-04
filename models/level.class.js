@@ -6,10 +6,11 @@ class Level {
     salsaBottle;
     coin;
     statusBarBigBoss;
+    healthyHeart;
 
     level_end_x = 2200;
 
-    constructor(enemies, bigBoss, clouds, backgroundObjects, salsaBottle, coin, statusBarBigBoss) {
+    constructor(enemies, bigBoss, clouds, backgroundObjects, salsaBottle, coin, statusBarBigBoss, healthyHeart) {
         this.enemies = enemies;
         this.bigBoss = bigBoss;
         this.clouds = clouds;
@@ -17,6 +18,7 @@ class Level {
         this.salsaBottle = salsaBottle;
         this.coin = coin;
         this.statusBarBigBoss = statusBarBigBoss;
+        this.healthyHeart = healthyHeart;
     }
 
 }

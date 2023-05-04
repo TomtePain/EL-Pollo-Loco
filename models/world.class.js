@@ -48,7 +48,7 @@ class World {
             this.checkKilledBigBoss();
             this.collisionKilledBigBoss();
             this.checkBottleOnGround();
-            this.collisionDrops();
+            this.checkCollisionHealth();
         }, 100);
     }
 
@@ -59,7 +59,7 @@ class World {
             this.idle = true;
         } else {
             this.idle = false;
-        }
+        };
     }
 
     checkCollisions() {
@@ -75,37 +75,22 @@ class World {
                 };
             };
         });
-    };
-
-    // Work in Progress
-    dropItem(enemy) {
-        let healthyHeart = new HealthyHeart(enemy.x);
-        let salsa = new SalsaBottle(enemy.x, 360);
-        let dropList = [healthyHeart, salsa];
-        let drops = dropList[Math.floor(Math.random() * dropList.length)];
-        this.items.push(drops);
-        this.collisionDrops(salsa, healthyHeart);
-    };
- // Work in Progress
-    collisionDrops(salsa, healthyHeart) {
-        this.items.forEach((drop, i) => {
-            if (this.character.isColliding(drop) && drop == salsa) {
-                console.log('bottle dropped');
-                this.collectedBottle.push(drop);
-                this.SalsaBottleCounter++;
-                this.statusForBottle.setPercentage(this.SalsaBottleCounter);
-                this.items.splice(i, 1);
-            } else if (this.character.isColliding(drop) && drop == healthyHeart) {
-                console.log('live dropped');
-                this.character.energy += 10;
-                this.statusBar.setPercentage(this.character.energy);
-            }
-            if (this.character.x >= drop.x) {
-                this.items.splice(i, 1);
-            }
-        })
     }
 
+    dropItem(enemy) {
+        let healthyHeart = new HealthyHeart(enemy.x + 30);
+        let salsa = new SalsaBottle(enemy.x + 30, 360);
+        let coins = new Coin(enemy.x + 30, 350)
+        let dropList = [healthyHeart, salsa, coins];
+        let drops = dropList[Math.floor(Math.random() * dropList.length)];
+        if (drops == salsa) {
+            this.level.salsaBottle.push(salsa);
+        } else if (drops == healthyHeart) {
+            this.level.healthyHeart.push(healthyHeart);
+        } else {
+            this.level.coin.push(coins);
+        }
+    }
 
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000 && this.level.bigBoss[0].life == true) {
@@ -116,8 +101,7 @@ class World {
                 this.level.statusBarBigBoss[0].x = this.level.bigBoss[0].x;
             };
         };
-    };
-
+    }
 
     collisionBigBoss() {
         this.level.bigBoss[0].speed = 0;
@@ -126,29 +110,41 @@ class World {
         setTimeout(() => {
             this.level.bigBoss[0].speed = 10;
         }, 1000);
-    };
-
+    }
 
     checkCollisionBottle() {
         this.level.salsaBottle.forEach((bottle, i) => {
             if (this.character.isColliding(bottle)) {
                 this.collectedBottle.push(bottle);
                 this.SalsaBottleCounter++;
+                this.setHooverEffect(this.statusForBottle);
                 this.statusForBottle.setPercentage(this.SalsaBottleCounter);
                 this.level.salsaBottle.splice(i, 1);
             };
         });
-    };
+    }
 
     checkCollisionCoins() {
         this.level.coin.forEach((coins, i) => {
             if (this.character.isColliding(coins)) {
                 this.coinCounter++;
+                this.setHooverEffect(this.statusBarCoins);
                 this.statusBarCoins.setPercentage(this.coinCounter);
                 this.level.coin.splice(i, 1);
             };
         });
-    };
+    }
+
+    checkCollisionHealth() {
+        this.level.healthyHeart.forEach((heart, i) => {
+            if (this.character.isColliding(heart)) {
+                this.character.energy += 10;
+                this.setHooverEffect(this.statusBar);
+                this.statusBar.setPercentage(this.character.energy);
+                this.level.healthyHeart.splice(i, 1);
+            };
+        });
+    }
 
     checkThrowObjects() {
         if (this.keyboard.d && this.collectedBottle != '') {
@@ -165,7 +161,7 @@ class World {
                 keypress = true;
             };
         };
-    };
+    }
 
     checkBottleBigBossCollision() {
         this.throwableObject_bottle.forEach((bottle, i) => {
@@ -195,9 +191,7 @@ class World {
                 this.bottleOnGround = false;
             };
             if (this.character.x > bottle.x) {
-                // setTimeout(() => {
                 this.throwableObject_bottle.splice(i, 1)
-                // }, 200);
             }
         })
     }
@@ -211,11 +205,20 @@ class World {
     collisionKilledBigBoss() {
         if (this.character.isCollidingFriedBigBoss(this.level.bigBoss[0]) && this.level.bigBoss[0].isDead()) {
             this.friedChicken = true;
+            this.level.bigBoss[0].life = false;
             this.character.energy = 100;
             this.statusBar.setPercentage(this.character.energy);
         }
     }
 
+    setHooverEffect(status) {
+        status.height += 10;
+        status.width += 10;
+        setTimeout(() => {
+            status.height -= 10;
+            status.width -= 10;
+        }, 300)
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -241,8 +244,7 @@ class World {
         this.addObjectsToMap(this.level.coin);
         this.addObjectsToMap(this.throwableObject_bottle);
         this.addObjectsToMap(this.level.statusBarBigBoss);
-        this.addObjectsToMap(this.items);
-
+        this.addObjectsToMap(this.level.healthyHeart);
 
 
         this.ctx.translate(-this.camera_x, 0);

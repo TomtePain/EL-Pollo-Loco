@@ -97,23 +97,23 @@ class Character extends MovableObject {
             this.walking_sound.pause();
 
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
-                if(this.moving == true){
+                if (this.moving == true) {
                     this.moveRight();
-                this.walking_sound.play();
-                this.otherDirection = false;
+                    this.walking_sound.play();
+                    this.otherDirection = false;
                 }
             }
 
             if (this.world.keyboard.left && this.x > 0) {
-                if(this.moving == true) {
+                if (this.moving == true) {
                     this.moveLeft();
-                this.walking_sound.play();
-                this.otherDirection = true;
+                    this.walking_sound.play();
+                    this.otherDirection = true;
                 }
             }
 
             if (this.world.keyboard.up && !this.isAboveGround() || this.world.keyboard.space && !this.isAboveGround()) {
-                if(this.moving == true){
+                if (this.moving == true) {
                     this.jump();
                 }
             }
@@ -136,18 +136,18 @@ class Character extends MovableObject {
             }
             else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
-                    if(this.moving == true)
-                    this.playAnimations(this.Images_Walking);
+                    if (this.moving == true)
+                        this.playAnimations(this.Images_Walking);
                 }
             }
         }, 100);
 
         setInterval(() => {
-            if (this.isDead() || this.isHurt() || this.isAboveGround()) {}
+            if (this.isDead() || this.isHurt() || this.isAboveGround()) { }
             else {
                 if (this.world.keyboard.right || this.world.keyboard.left) {
-                } 
-                else if(this.world.friedChicken == true) {
+                }
+                else if (this.world.friedChicken == true) {
                     this.loadImg(this.Images_Jumping[3]);
                     this.moving = false;
                 }

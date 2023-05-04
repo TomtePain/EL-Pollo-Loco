@@ -61,6 +61,10 @@ let level1 = new Level(
 
     [
         new Statusbar_Endboss(2450, -5)
+    ],
+
+    [
+        
     ]
 
 );
