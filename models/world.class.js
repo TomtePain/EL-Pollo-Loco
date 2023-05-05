@@ -20,6 +20,7 @@ class World {
     friedChicken = false;
     splashedBottle = false;
     bottleOnGround = false;
+    gameOver = false;
 
 
     constructor(canvas, keyboard) {
@@ -219,6 +220,7 @@ class World {
             status.width -= 10;
         }, 300)
     }
+
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

@@ -150,6 +150,7 @@ class Character extends MovableObject {
                 else if (this.world.friedChicken == true) {
                     this.loadImg(this.Images_Jumping[3]);
                     this.moving = false;
+                    world.gameOver = true;
                 }
                 else if (this.isIdle()) {
                     this.playAnimations(this.Images_Sleep);

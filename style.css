@@ -4,11 +4,27 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    margin: 0;
+    background-image: url('img_pollo_locco/background/art-1280.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 canvas {
     background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: url('img_pollo_locco/background/art-1280.png');
     background-repeat: no-repeat;
     background-size: cover;
 }

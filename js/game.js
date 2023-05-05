@@ -5,11 +5,11 @@ let downCounter = 0;
 let keypress = false;
 let timepassed;
 let timeForIdle;
+let endImg ='img_pollo_locco/9_intro_outro_screens/game_over/game over!.png';
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-    console.log('My Character is', world.character)
 }
 
 window.addEventListener("keydown", (e) => {
