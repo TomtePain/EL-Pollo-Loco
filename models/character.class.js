@@ -151,6 +151,7 @@ class Character extends MovableObject {
                     this.loadImg(this.Images_Jumping[3]);
                     this.moving = false;
                     world.gameOver = true;
+                    gameOver();
                 }
                 else if (this.isIdle()) {
                     this.playAnimations(this.Images_Sleep);
@@ -165,6 +166,5 @@ class Character extends MovableObject {
     isIdle() {
         return this.world.idle == true
     }
-
 
 }

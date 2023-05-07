@@ -8,7 +8,6 @@
     <title>El-Pollo-Loco</title>
     <link rel="stylesheet" href="style.css">
 
-    <script src="models/world.class.js"></script>
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/chicken.class.js"></script>
@@ -19,7 +18,7 @@
     <script src="models/statusbar.class.js"></script>
     <script src="models/statusbar-bottle.class.js"></script>
     <script src="models/statusbar-coin.class.js"></script>
-    <!-- <script src="models/world.class.js"></script> -->
+    <script src="models/world.class.js"></script>
     <script src="models/keyboard.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/throwable-object.js"></script>
@@ -33,17 +32,16 @@
 </head>
 
 <body>
-    <!-- onload="init()" -->
 
     <div class="content" id="content">
 
         <h1>El Pollo Loco</h1>
 
         <div id="StartScreen">
-            <div id="start-btn-container">
-                <div id="start-btn" onclick="init()">START</div>
+            <div class="start-btn-container" id="start-btn-container">
+                <div id="start-btn" class="button" onclick="init()">START</div>
             </div>
-            <img src="img_pollo_locco/9_intro_outro_screens/start/startscreen_1.png" alt="">
+            <img id="start-screen-img" src="img_pollo_locco/9_intro_outro_screens/start/startscreen_1.png" alt="">
         </div>
 
         <canvas class="d-none" width="720px" , height="480px" id="canvas"></canvas>
@@ -58,10 +56,17 @@
 
                 <div class="btn-section-right-btn-throw" id="btn-throw">
                     <img style="width: 24px; height: 24px;" src="img_pollo_locco/buttons/bottle-4-24.ico" alt="">
-
                 </div>
-
             </div>
+        </div>
+
+        <div id="end-screen" class="d-none">
+            <div class="start-btn-container">
+                <div class="button" onclick="restartGame()">
+                    RESTART
+                </div>
+            </div>
+            <img src="img_pollo_locco/9_intro_outro_screens/game_over/game over.png" alt="">
         </div>
     </div>
 

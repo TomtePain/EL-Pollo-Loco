@@ -239,7 +239,6 @@ class World {
 
         this.ctx.translate(this.camera_x, 0); // Forwards
 
-
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.bigBoss);
         this.addObjectsToMap(this.level.salsaBottle);
@@ -248,11 +247,8 @@ class World {
         this.addObjectsToMap(this.level.statusBarBigBoss);
         this.addObjectsToMap(this.level.healthyHeart);
 
-
         this.ctx.translate(-this.camera_x, 0);
 
-
-        // draw() wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -271,8 +267,6 @@ class World {
         }
 
         MovableObject.draw(this.ctx);
-        // MovableObject.drawFrame(this.ctx);
-        // MovableObject.drawFrameOffset(this.ctx);
 
         if (MovableObject.otherDirection) {
             this.flipImageBack(MovableObject);

@@ -66,28 +66,31 @@ class Endboss extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (world.character.x + world.character.width > 2000) {
-                this.animationRequestOnWalk();
-            } else if (this.isDead()) {
-                this.animationIsDead();
-            }else if (this.isHurt()) {
-                this.playAnimations(this.Images_Hurt);
-            }else if(this.isColliding(world.character)) {
-                this.playAnimations(this.Images_Attack);
-                world.collisionBigBoss();
-            } else {
-                this.playAnimations(this.Images_Alert);
+            if (gameLoaded == true) {
+                if (world.character.x + world.character.width > 2000) {
+                    this.animationRequestOnWalk();
+                } else if (this.isDead()) {
+                    this.animationIsDead();
+                } else if (this.isHurt()) {
+                    this.playAnimations(this.Images_Hurt);
+                } else if (this.isColliding(world.character)) {
+                    this.playAnimations(this.Images_Attack);
+                    world.collisionBigBoss();
+                } else {
+                    this.playAnimations(this.Images_Alert);
+                }
             }
         }, 200);
     }
 
+
     animationIsDead() {
         this.life = false;
         setTimeout(() => {
-            if(this.Images_Dead[2]){
+            if (this.Images_Dead[2]) {
                 this.loadImg(this.Images_Dead[2]);
                 world.level.statusBarBigBoss.splice(0, 1)
-                if(world.friedChicken == true) {
+                if (world.friedChicken == true) {
                     this.y = 150;
                     this.x = world.character.x + 20;
                 } else {
@@ -96,10 +99,10 @@ class Endboss extends MovableObject {
                         this.height = 80;
                         this.y = 350;
                     }, 100);
-                }                
-            } else{
+                }
+            } else {
                 this.playAnimations(this.Images_Dead);
-            }            
+            }
         }, 100)
     }
 
@@ -109,10 +112,10 @@ class Endboss extends MovableObject {
             this.speed = 0;
         } else if (this.isHurt()) {
             this.playAnimations(this.Images_Hurt);
-        }else if(this.isColliding(world.character)) {
+        } else if (this.isColliding(world.character)) {
             this.playAnimations(this.Images_Attack);
             world.collisionBigBoss();
-        }else{
+        } else {
             this.playAnimations(this.Images_Walking)
         }
     }

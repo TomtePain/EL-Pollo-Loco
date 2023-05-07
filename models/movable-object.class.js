@@ -11,6 +11,7 @@ class MovableObject extends DrawableObject {
     fall = false;
     moving = true;
     ground = 115;
+    
 
     offset = {
         top: 0,

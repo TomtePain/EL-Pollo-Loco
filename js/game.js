@@ -5,6 +5,7 @@ let downCounter = 0;
 let keypress = false;
 let timepassed;
 let timeForIdle;
+let gameLoaded = false;
 
 function init() {
     document.getElementById('StartScreen').classList.add('d-none');
@@ -12,6 +13,7 @@ function init() {
     canvas.classList.remove('d-none');
 
     world = new World(canvas, keyboard);
+    gameLoaded = true;
     touchBtns();
 }
 
@@ -156,4 +158,16 @@ function exitFullscreen() {
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
+}
+
+function gameOver() {
+    let end = document.getElementById('end-screen');
+    setTimeout(() => {
+        end.classList.remove('d-none');
+        stopGame();
+    }, 1000);
+}
+
+function restartGame() {
+    location.reload();
 }
