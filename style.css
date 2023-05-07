@@ -7,6 +7,10 @@ body {
     font-family: 'zabars', sans-serif;
 }
 
+.d-none {
+    display: none !important;
+}
+
 h1 {
     font-size: 64px;
     letter-spacing: 3px;
@@ -34,6 +38,12 @@ canvas {
 #StartScreen {
     width: 720px;
     height: 480px;
+    position: relative;
+}
+
+#start-btn {
+    display: flex;
+    position: absolute;
 }
 
 #StartScreen img {
