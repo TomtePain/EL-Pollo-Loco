@@ -41,9 +41,18 @@ canvas {
     position: relative;
 }
 
-#start-btn {
+#start-btn-container {
     display: flex;
+    justify-content: center;
     position: absolute;
+    width: 720px;
+}
+
+#start-btn {
+    background-color: yellow;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 #StartScreen img {

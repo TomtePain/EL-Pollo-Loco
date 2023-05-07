@@ -7,7 +7,10 @@ let timepassed;
 let timeForIdle;
 
 function init() {
+    document.getElementById('StartScreen').classList.add('d-none');
     canvas = document.getElementById('canvas');
+    canvas.classList.remove('d-none');
+
     world = new World(canvas, keyboard);
     touchBtns();
 }
