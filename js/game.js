@@ -9,12 +9,17 @@ let gameLoaded = false;
 
 function init() {
     document.getElementById('StartScreen').classList.add('d-none');
+    addTouchButtons();
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
 
     world = new World(canvas, keyboard);
     gameLoaded = true;
     touchBtns();
+}
+
+function addTouchButtons() {
+    document.getElementById('btn-section').classList.remove('d-none');
 }
 
 window.addEventListener("keydown", (e) => {
