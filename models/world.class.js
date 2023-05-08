@@ -71,7 +71,7 @@ class World {
                     this.character.bumpUp();
                     this.dropItem(enemy);
                 } else {
-                    this.character.hit(5);
+                    this.character.hit(10);
                     this.statusBar.setPercentage(this.character.energy);
                 };
             };
@@ -106,7 +106,7 @@ class World {
 
     collisionBigBoss() {
         this.level.bigBoss[0].speed = 0;
-        this.character.hit(10);
+        this.character.hit(20);
         this.statusBar.setPercentage(this.character.energy);
         setTimeout(() => {
             this.level.bigBoss[0].speed = 10;
