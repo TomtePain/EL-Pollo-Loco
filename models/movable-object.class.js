@@ -11,7 +11,7 @@ class MovableObject extends DrawableObject {
     fall = false;
     moving = true;
     ground = 115;
-    
+
 
     offset = {
         top: 0,
@@ -130,7 +130,11 @@ class MovableObject extends DrawableObject {
     killedChicken(enemy, i) {
         this.life = false;
         setInterval(() => {
-            enemy.loadImg('img_pollo_locco/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+            if (this instanceof Chicken) {
+                enemy.loadImg('img_pollo_locco/3_enemies_chicken/chicken_normal/2_dead/dead.png');
+            } else {
+                enemy.loadImg('img_pollo_locco/3_enemies_chicken/chicken_small/2_dead/dead.png')
+            }
         }, 1);
         this.speed = 0;
         enemy.chicken_sound.play();
@@ -148,5 +152,5 @@ class MovableObject extends DrawableObject {
         timepass = timepass / 1000;
         return timepass < 0.5;
     }
-    
+
 }
