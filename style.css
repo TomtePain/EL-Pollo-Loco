@@ -21,12 +21,14 @@ canvas {
     background-color: black;
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    top: 150px;
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     width: 100%;
     min-height: 100vh;
@@ -108,7 +110,7 @@ canvas {
     width: 720px;
     height: 480px;
     position: absolute;
-    bottom: 76px;
+    top: 150px;
 }
 
 #end-screen img {
