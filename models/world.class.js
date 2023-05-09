@@ -70,9 +70,10 @@ class World {
                     enemy.killedChicken(enemy, i);
                     this.character.bumpUp();
                     this.dropItem(enemy);
-                } else {
+                } else if (!this.character.isInvulnerable()) {
                     this.character.hit(10);
                     this.statusBar.setPercentage(this.character.energy);
+                    this.character.isInvulnerable();
                 };
             };
         });
@@ -103,14 +104,17 @@ class World {
             };
         };
     }
-
+    
     collisionBigBoss() {
         this.level.bigBoss[0].speed = 0;
-        this.character.hit(20);
-        this.statusBar.setPercentage(this.character.energy);
-        setTimeout(() => {
-            this.level.bigBoss[0].speed = 10;
-        }, 1000);
+        if (!this.character.isInvulnerable()) {
+            this.character.hit(20);
+            this.character.isInvulnerable();
+            this.statusBar.setPercentage(this.character.energy);
+            setTimeout(() => {
+                this.level.bigBoss[0].speed = 10;
+            }, 1000);
+        }
     }
 
     checkCollisionBottle() {
@@ -173,9 +177,7 @@ class World {
                 this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;
-                if (this.level.bigBoss[0].energy > 0) {
-                    this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy);
-                }
+                if (this.level.bigBoss[0].energy > 0) {this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy)};
                 setTimeout(() => {
                     this.throwableObject_bottle.splice(i, 1);
                     this.contact = false;
@@ -224,31 +226,11 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
-        this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
-        this.addToMap(this.character);
-
-        this.ctx.translate(-this.camera_x, 0); // Back
-        // --- Space for fixed objects
-        this.addToMap(this.statusBar);
-        this.addToMap(this.statusForBottle);
-        this.addToMap(this.statusBarCoins);
-
-        this.ctx.translate(this.camera_x, 0); // Forwards
-
-        this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.bigBoss);
-        this.addObjectsToMap(this.level.salsaBottle);
-        this.addObjectsToMap(this.level.coin);
-        this.addObjectsToMap(this.throwableObject_bottle);
-        this.addObjectsToMap(this.level.statusBarBigBoss);
-        this.addObjectsToMap(this.level.healthyHeart);
-
+        this.renderEssentialObjectsToMap();
+        this.addFixedObjectstoMap();
+        this.addsMovableObjectsToMap();
         this.ctx.translate(-this.camera_x, 0);
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
@@ -271,6 +253,32 @@ class World {
         if (MovableObject.otherDirection) {
             this.flipImageBack(MovableObject);
         }
+    }
+
+    renderEssentialObjectsToMap() {
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+        this.addToMap(this.character);
+    }
+
+    addFixedObjectstoMap() {
+        this.ctx.translate(-this.camera_x, 0); // Back
+        // --- Space for fixed objects
+        this.addToMap(this.statusBar);
+        this.addToMap(this.statusForBottle);
+        this.addToMap(this.statusBarCoins);
+
+        this.ctx.translate(this.camera_x, 0); // Forwards
+    }
+
+    addsMovableObjectsToMap() {
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.bigBoss);
+        this.addObjectsToMap(this.level.salsaBottle);
+        this.addObjectsToMap(this.level.coin);
+        this.addObjectsToMap(this.throwableObject_bottle);
+        this.addObjectsToMap(this.level.statusBarBigBoss);
+        this.addObjectsToMap(this.level.healthyHeart);
     }
 
     flipImage(MovableObject) {

@@ -20,10 +20,6 @@ class MovableObject extends DrawableObject {
         bottom: 0
     }
 
-
-
-
-
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -151,6 +147,12 @@ class MovableObject extends DrawableObject {
         let timepass = new Date().getTime() - this.lastHit;
         timepass = timepass / 1000;
         return timepass < 0.5;
+    }
+
+    isInvulnerable() {
+        let timepass = new Date().getTime() - this.lastHit;
+        timepass = timepass / 1000;
+        return timepass < 1;
     }
 
 }

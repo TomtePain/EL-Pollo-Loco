@@ -167,6 +167,10 @@ function exitFullscreen() {
 
 function gameOver() {
     let end = document.getElementById('end-screen');
+    let img = document.getElementById('end-screen-img');
+    if(world.character.isDead()) {
+        img.src = 'img_pollo_locco/9_intro_outro_screens/game_over/oh no you lost!.png';
+    }     
     setTimeout(() => {
         end.classList.remove('d-none');
         stopGame();
