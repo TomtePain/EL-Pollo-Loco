@@ -14,7 +14,7 @@ class LittleChicken extends MovableObject {
         'img_pollo_locco/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ]
 
-    chicken_sound = new Audio('audio/chicken.mp3');
+    chicken_sound = new Audio('audio/little-chicken.mp3');
 
     constructor() {
         super();        

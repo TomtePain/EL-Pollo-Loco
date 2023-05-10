@@ -104,7 +104,7 @@ class World {
             };
         };
     }
-    
+
     collisionBigBoss() {
         this.level.bigBoss[0].speed = 0;
         if (!this.character.isInvulnerable()) {
@@ -172,12 +172,13 @@ class World {
         this.throwableObject_bottle.forEach((bottle, i) => {
             if (this.level.bigBoss[0].isColliding(bottle) && this.contact == false) {
                 this.contact = true;
+                // bottle.bottleBreak_sound.play();
                 bottle.splashedBottle = true;
                 this.level.bigBoss[0].hit(20);
                 this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;
-                if (this.level.bigBoss[0].energy > 0) {this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy)};
+                if (this.level.bigBoss[0].energy > 0) { this.level.statusBarBigBoss[0].setPercentage(this.level.bigBoss[0].energy) };
                 setTimeout(() => {
                     this.throwableObject_bottle.splice(i, 1);
                     this.contact = false;
@@ -190,14 +191,20 @@ class World {
         this.throwableObject_bottle.forEach((bottle, i) => {
             if (bottle.y >= 360) {
                 this.bottleOnGround = true;
+                bottle.bottleBreak_sound.play();
+                setTimeout(() => {
+                    bottle.bottleBreak_sound.pause();
+                }, 1000);
             } else {
                 this.bottleOnGround = false;
             };
-            if (this.character.x > bottle.x) {
-                this.throwableObject_bottle.splice(i, 1)
+            if (this.character.x >= bottle.x) {
+                this.throwableObject_bottle.splice(i, 1);
+                bottle.bottleBreak_sound.pause();
             }
         })
     }
+
 
     checkKilledBigBoss() {
         if (this.level.bigBoss[0].energy <= 0) {

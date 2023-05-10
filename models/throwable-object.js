@@ -16,6 +16,8 @@ class ThrowableObject extends MovableObject {
         'img_pollo_locco/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ]
 
+    bottleBreak_sound = new Audio('audio/bottle-break.mp3');
+
     constructor(x, y) {
         super().loadImg('img_pollo_locco/6_salsa_bottle/salsa_bottle.png');
         this.loadImages(this.Images_Splashed);
@@ -33,11 +35,11 @@ class ThrowableObject extends MovableObject {
         this.speedY = 10;
         this.applyGravity();
         setInterval(() => {
-            if(world.splashedBottle == false) {
+            if (world.splashedBottle == false) {
                 this.playAnimations(this.Images_Rotation);
             }
             this.x += 8;
-            if(this.y >= 360) {
+            if (this.y >= 360) {
                 world.bottleOnGround = true;
                 this.loadImg(this.Images_Splashed[4]);
                 this.x -= 8;
@@ -49,10 +51,12 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         if (world.splashedBottle == true) {
-                setInterval(() => {
-                    this.playAnimations(this.Images_Splashed);
-                },50);
-            } 
-        } 
+            setInterval(() => {
+                this.playAnimations(this.Images_Splashed);
+            }, 50);
+        }
+    }
+
     
+
 }
