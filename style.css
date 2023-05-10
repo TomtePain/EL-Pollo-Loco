@@ -98,6 +98,14 @@ canvas {
     justify-content: center;
 }
 
+.btn-info {
+    width: 720px;
+    height: 30px;
+    background-color: brown;
+    position: absolute;
+    top: 120px;
+}
+
 #btn-right,
 #btn-left,
 #btn-up,
@@ -145,6 +153,10 @@ canvas {
 
     .btn-section {
         display: flex;
+    }
+
+    .btn-info {
+        display: none;
     }
 }
 

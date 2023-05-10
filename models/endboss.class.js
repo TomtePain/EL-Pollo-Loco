@@ -11,6 +11,8 @@ class Endboss extends MovableObject {
         bottom: 0
     }
 
+    end_bigboss_sound = new Audio('audio/holy.mp3');
+
     Images_Alert = [
         'img_pollo_locco/4_enemie_boss_chicken/2_alert/G5.png',
         'img_pollo_locco/4_enemie_boss_chicken/2_alert/G6.png',

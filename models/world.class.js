@@ -120,6 +120,7 @@ class World {
     checkCollisionBottle() {
         this.level.salsaBottle.forEach((bottle, i) => {
             if (this.character.isColliding(bottle)) {
+                bottle.bottle_drop_sound.play();
                 this.collectedBottle.push(bottle);
                 this.SalsaBottleCounter++;
                 this.setHooverEffect(this.statusForBottle);
@@ -132,6 +133,7 @@ class World {
     checkCollisionCoins() {
         this.level.coin.forEach((coins, i) => {
             if (this.character.isColliding(coins)) {
+                coins.coin_sound.play();
                 this.coinCounter++;
                 this.setHooverEffect(this.statusBarCoins);
                 this.statusBarCoins.setPercentage(this.coinCounter);
@@ -143,6 +145,7 @@ class World {
     checkCollisionHealth() {
         this.level.healthyHeart.forEach((heart, i) => {
             if (this.character.isColliding(heart)) {
+                heart.heal_sound.play();
                 this.character.energy += 10;
                 this.setHooverEffect(this.statusBar);
                 this.statusBar.setPercentage(this.character.energy);
@@ -172,7 +175,7 @@ class World {
         this.throwableObject_bottle.forEach((bottle, i) => {
             if (this.level.bigBoss[0].isColliding(bottle) && this.contact == false) {
                 this.contact = true;
-                // bottle.bottleBreak_sound.play();
+                bottle.bottle_bigboss_sound.play();
                 bottle.splashedBottle = true;
                 this.level.bigBoss[0].hit(20);
                 this.level.bigBoss[0].isHurt();
@@ -191,16 +194,11 @@ class World {
         this.throwableObject_bottle.forEach((bottle, i) => {
             if (bottle.y >= 360) {
                 this.bottleOnGround = true;
-                bottle.bottleBreak_sound.play();
-                setTimeout(() => {
-                    bottle.bottleBreak_sound.pause();
-                }, 1000);
             } else {
                 this.bottleOnGround = false;
             };
             if (this.character.x >= bottle.x) {
                 this.throwableObject_bottle.splice(i, 1);
-                bottle.bottleBreak_sound.pause();
             }
         })
     }
@@ -214,6 +212,8 @@ class World {
 
     collisionKilledBigBoss() {
         if (this.character.isCollidingFriedBigBoss(this.level.bigBoss[0]) && this.level.bigBoss[0].isDead()) {
+            this.level.bigBoss[0].end_bigboss_sound.play();
+            this.setHooverEffect(this.statusBar);
             this.friedChicken = true;
             this.level.bigBoss[0].life = false;
             this.character.energy = 100;
@@ -221,12 +221,12 @@ class World {
         }
     }
 
-    setHooverEffect(status) {
-        status.height += 10;
-        status.width += 10;
+    setHooverEffect(statusbar) {
+        statusbar.height += 10;
+        statusbar.width += 10;
         setTimeout(() => {
-            status.height -= 10;
-            status.width -= 10;
+            statusbar.height -= 10;
+            statusbar.width -= 10;
         }, 300)
     }
 

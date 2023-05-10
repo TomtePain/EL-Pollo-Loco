@@ -1,5 +1,7 @@
 class SalsaBottle extends MovableObject{
 
+bottle_drop_sound = new Audio('audio/bottle-drop.mp3')
+
     constructor(x, y) {
         super().loadImg('img_pollo_locco/6_salsa_bottle/1_salsa_bottle_on_ground.png');
         this.x = x;

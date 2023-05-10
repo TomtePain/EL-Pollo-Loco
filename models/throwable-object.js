@@ -16,7 +16,7 @@ class ThrowableObject extends MovableObject {
         'img_pollo_locco/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png'
     ]
 
-    bottleBreak_sound = new Audio('audio/bottle-break.mp3');
+    bottle_bigboss_sound = new Audio('audio/bottle-splash.mp3');
 
     constructor(x, y) {
         super().loadImg('img_pollo_locco/6_salsa_bottle/salsa_bottle.png');
@@ -56,7 +56,4 @@ class ThrowableObject extends MovableObject {
             }, 50);
         }
     }
-
-    
-
 }
