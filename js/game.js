@@ -7,7 +7,6 @@ let timepassed;
 let timeForIdle;
 let gameLoaded = false;
 
-
 function init() {
     document.getElementById('StartScreen').classList.add('d-none');
     addTouchButtons();
@@ -144,7 +143,7 @@ function clearAllIntervals() {
 
 
 function fullScreen() {
-    let fullScreen = document.getElementById('content');
+    let fullScreen = document.getElementById('fullscreen');
     enterFullscreen(fullScreen);
 }
 
@@ -178,6 +177,9 @@ function gameOver() {
     }, 2000);
 }
 
+/**
+ * The function restarts the game by reloading the current page.
+ */
 function restartGame() {
     location.reload();
 }

@@ -1,5 +1,4 @@
 class MovableObject extends DrawableObject {
-
     speed = 0.1;
     otherDirection = false;
     speedY = 0;
@@ -11,7 +10,6 @@ class MovableObject extends DrawableObject {
     fall = false;
     moving = true;
     ground = 115;
-
 
     offset = {
         top: 0,
