@@ -131,7 +131,7 @@ class MovableObject extends DrawableObject {
             }
         }, 1);
         this.speed = 0;
-        enemy.chicken_sound.play();
+        if(audioActive == true){enemy.chicken_sound.play()};
         setTimeout(() => {
             world.level.enemies.splice(i, 1);
         }, 500);

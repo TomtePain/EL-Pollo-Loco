@@ -6,6 +6,7 @@ let keypress = false;
 let timepassed;
 let timeForIdle;
 let gameLoaded = false;
+let audioActive = true;
 
 function init() {
     document.getElementById('StartScreen').classList.add('d-none');
@@ -142,28 +143,46 @@ function clearAllIntervals() {
 };
 
 
-function fullScreen() {
-    let fullScreen = document.getElementById('fullscreen');
-    enterFullscreen(fullScreen);
-}
-
-function enterFullscreen(element) {
-    if (element.requestFullscreen) {
-        element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-        element.msRequestFullscreen();
-    } else if (element.webkitRequestFullscreen) {  // iOS Safari
-        element.webkitRequestFullscreen();
+function setAudioIcon() {
+    let audioIcon = document.getElementById('audio-icon');
+    if(audioActive == true) {
+        audioIcon.src = 'img_pollo_locco/buttons/volume.ico';
+    }else {
+        audioIcon.src = 'img_pollo_locco/buttons/mute.ico'
     }
 }
 
-function exitFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
+function setAudioMode() {
+    if(audioActive == true) {
+        audioActive = false;
+    }else {
+        audioActive = true;
     }
+    setAudioIcon();
 }
+
+// function fullScreen() {
+//     let fullScreen = document.getElementById('canvas');
+//     enterFullscreen(fullScreen);
+// }
+
+// function enterFullscreen(element) {
+//     if (element.requestFullscreen) {
+//         element.requestFullscreen();
+//     } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+//         element.msRequestFullscreen();
+//     } else if (element.webkitRequestFullscreen) {  // iOS Safari
+//         element.webkitRequestFullscreen();
+//     }
+// }
+
+// function exitFullscreen() {
+//     if (document.exitFullscreen) {
+//         document.exitFullscreen();
+//     } else if (document.webkitExitFullscreen) {
+//         document.webkitExitFullscreen();
+//     }
+// }
 
 function gameOver() {
     let end = document.getElementById('end-screen');

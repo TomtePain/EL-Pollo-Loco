@@ -105,7 +105,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
             if (this.moving == true) {
                 super.moveRight();
-                this.walking_sound.play();
+                if(audioActive == true){this.walking_sound.play()};
                 this.otherDirection = false;
             }
         }
@@ -115,7 +115,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.left && this.x > 0) {
             if (this.moving == true) {
                 super.moveLeft();
-                this.walking_sound.play();
+                if(audioActive == true){this.walking_sound.play()};
                 this.otherDirection = true;
             }
         }
