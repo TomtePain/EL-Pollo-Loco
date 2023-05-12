@@ -131,6 +131,12 @@ canvas {
     display: flex;
     border-radius: 100%;
     border: 3px solid white;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: lighter;
+    color: white;
 }
 
 .fullscreen {
@@ -139,6 +145,10 @@ canvas {
     background-color: brown;
     position: absolute;
     top: 120px;
+}
+
+#btn-fullscreen {
+    display: none;
 }
 
 #btn-right,
