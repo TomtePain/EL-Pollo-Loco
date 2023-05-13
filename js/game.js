@@ -155,10 +155,10 @@ function setAudioIcon() {
     let audioIcon = document.getElementById('audio-icon');
     let soundTouch = document.getElementById('btn-sound');
     if(audioActive == true) {
-        audioIcon.src = 'img_pollo_locco/buttons/volume.ico';
+        audioIcon.src = 'img_pollo_locco/buttons/volume brown.ico';
         soundTouch.src = 'img_pollo_locco/buttons/volume.ico';
     }else {
-        audioIcon.src = 'img_pollo_locco/buttons/mute.ico';
+        audioIcon.src = 'img_pollo_locco/buttons/mute-brown.ico';
         soundTouch.src = 'img_pollo_locco/buttons/mute.ico';
     }
 }

@@ -185,6 +185,7 @@ class World {
                 if(audioActive == true){bottle.bottle_bigboss_sound.play()};
                 bottle.splashedBottle = true;
                 this.level.bigBoss[0].hit(20);
+                if(audioActive == true){this.level.bigBoss[0].chicken_sound.play()}
                 this.level.bigBoss[0].isHurt();
                 bottle.animate();
                 bottle.speedY = 0;

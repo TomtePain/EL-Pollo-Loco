@@ -29,7 +29,6 @@ canvas {
 .content {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     width: 100%;
     min-height: 100vh;
@@ -53,10 +52,14 @@ canvas {
 }
 
 .button {
-    background-color: yellow;
-    padding: 10px;
-    margin-top: 10px;
+    background-image: linear-gradient(180deg, orange 0%, yellow 35%, yellow 65%, orange 100%);
+    box-shadow: 2px 2px 3px 1px brown;
+    padding: 10px 30px 10px 30px;
+    margin-top: 32px;
     cursor: pointer;
+    font-size: 32px;
+    text-shadow: 0px 0px 3px white;
+    letter-spacing: 1.5px;
 }
 
 #StartScreen img {
@@ -80,6 +83,10 @@ canvas {
 .btn-section-right-bottom {
     display: flex;
     flex-direction: row;
+}
+
+#audio-icon {
+    cursor: pointer;
 }
 
 .btn-section-right {
@@ -113,7 +120,7 @@ canvas {
 .btn-info {
     width: 720px;
     height: 30px;
-    background-color: brown;
+    background-image: linear-gradient(180deg, orange, yellow, orange);
     position: absolute;
     top: 120px;
     display: flex;
@@ -128,19 +135,20 @@ canvas {
     text-shadow: 0px 0px 3px white;
 }
 
+
 .btn-info-bottle {
     display: flex;
     border-radius: 100%;
-    border: 3px solid white;
+    border: 3px solid brown;
     width: 24px;
     height: 24px;
     justify-content: center;
     font-size: 26px;
     font-weight: lighter;
-    color: white;
+    color: brown;
 }
 
-.fullscreen {
+/* .fullscreen {
     width: 720px;
     height: 30px;
     background-color: brown;
@@ -150,7 +158,7 @@ canvas {
 
 #btn-fullscreen {
     display: none;
-}
+} */
 
 #btn-right,
 #btn-left,
