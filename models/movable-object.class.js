@@ -119,6 +119,9 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        if(this instanceof Character) {
+            if(audioActive == true) this.hit_sound.play();
+        }
     }
 
     killedChicken(enemy, i) {

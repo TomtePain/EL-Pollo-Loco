@@ -13,7 +13,6 @@ function init() {
     addTouchButtons();
     canvas = document.getElementById('canvas');
     canvas.classList.remove('d-none');
-
     world = new World(canvas, keyboard);
     gameLoaded = true;
     touchBtns();
@@ -77,6 +76,7 @@ function touchBtns() {
     touchBtnLeft();
     touchBtnUp();
     touchBtnthrow();
+    touchSoundIcon();
 }
 
 
@@ -133,9 +133,17 @@ function touchBtnthrow() {
     });
 }
 
+function touchSoundIcon() {
+    document.getElementById('btn-sound').addEventListener('touchstart', (e) => {
+        setAudioMode();
+        e.preventDefault();
+    });
+}
+
 
 function stopGame() {
     clearAllIntervals();
+    world.backgroundSound.pause();
 }
 
 function clearAllIntervals() {
@@ -145,10 +153,13 @@ function clearAllIntervals() {
 
 function setAudioIcon() {
     let audioIcon = document.getElementById('audio-icon');
+    let soundTouch = document.getElementById('btn-sound');
     if(audioActive == true) {
         audioIcon.src = 'img_pollo_locco/buttons/volume.ico';
+        soundTouch.src = 'img_pollo_locco/buttons/volume.ico';
     }else {
-        audioIcon.src = 'img_pollo_locco/buttons/mute.ico'
+        audioIcon.src = 'img_pollo_locco/buttons/mute.ico';
+        soundTouch.src = 'img_pollo_locco/buttons/mute.ico';
     }
 }
 

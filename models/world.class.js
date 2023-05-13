@@ -1,6 +1,7 @@
 class World {
     character = new Character();
     bigboss = new Endboss();
+    backgroundSound = new Audio('audio/background.mp3');
     // canvas.requestFullscreen;
     level = level1;
     canvas;
@@ -50,6 +51,7 @@ class World {
             this.collisionKilledBigBoss();
             this.checkBottleOnGround();
             this.checkCollisionHealth();
+            this.checkBackgroundMusic();
         }, 100);
     }
 
@@ -61,6 +63,11 @@ class World {
         } else {
             this.idle = false;
         };
+    }
+
+    checkBackgroundMusic() {
+        if(audioActive == true){this.backgroundSound.play()}
+        else {this.backgroundSound.pause()};
     }
 
     checkCollisions() {
