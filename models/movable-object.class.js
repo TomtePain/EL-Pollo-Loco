@@ -1,3 +1,5 @@
+/* The MovableObject class defines properties and methods for objects that can move and interact with
+other objects in a game. */
 class MovableObject extends DrawableObject {
     speed = 0.1;
     otherDirection = false;
@@ -18,6 +20,9 @@ class MovableObject extends DrawableObject {
         bottom: 0
     }
 
+    /**
+     * The function applies gravity to an object's vertical movement.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -31,6 +36,13 @@ class MovableObject extends DrawableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * The function checks if an object is above ground level.
+     * @returns If the object is an instance of ThrowableObject, the function is returning a tuple with
+     * two values: true and a boolean indicating whether the y coordinate is less than 400. If the
+     * object is not an instance of ThrowableObject, the function is returning a boolean indicating
+     * whether the y coordinate is less than 115.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) {
             return (true,
@@ -50,6 +62,11 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * The function plays a sequence of animations by cycling through a given array of images.
+     * @param images - The parameter "images" is an array of strings that represent the file paths of
+     * the images to be animated.
+     */
     playAnimations(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -124,6 +141,12 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    /**
+     * The function kills a chicken enemy in a game and removes it from the level after a set amount of
+     * time.
+     * @param enemy - The enemy object that the function is acting upon.
+     * @param i - The index of the enemy in the array of enemies in the current level.
+     */
     killedChicken(enemy, i) {
         this.life = false;
         setInterval(() => {
@@ -150,6 +173,14 @@ class MovableObject extends DrawableObject {
         return timepass < 0.5;
     }
 
+    /**
+     * The function checks if the object is invulnerable by calculating the time passed since the last
+     * hit and returning true if it's less than one second.
+     * @returns The function is checking if the time passed since the last hit is less than 1 second
+     * and returning a boolean value of true if the player is invulnerable (i.e. if less than 1 second
+     * has passed since the last hit) and false if the player is vulnerable (i.e. if more than 1 second
+     * has passed since the last hit).
+     */
     isInvulnerable() {
         let timepass = new Date().getTime() - this.lastHit;
         timepass = timepass / 1000;

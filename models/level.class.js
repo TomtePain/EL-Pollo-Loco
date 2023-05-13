@@ -1,3 +1,4 @@
+/* The Level class contains properties for enemies, bosses, objects, and items in a game level. */
 class Level {
     enemies;
     bigBoss;

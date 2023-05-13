@@ -1,3 +1,5 @@
+/* The World class manages the game world, including the player character, enemies, objects,
+collisions, and rendering. */
 class World {
     character = new Character();
     bigboss = new Endboss();
@@ -37,6 +39,10 @@ class World {
     }
 
 
+    /**
+     * The function runs a set of checks at a regular interval for a game, including checking for idle
+     * time, collisions, throwing objects, and background music.
+     */
     run() {
         setInterval(() => {
             this.checkTimeToIdle();
@@ -58,6 +64,9 @@ class World {
         this.checkCollisionHealth();
     }
 
+    /**
+     * The function checks if the user has been idle for more than 5 seconds.
+     */
     checkTimeToIdle() {
         timeForIdle = new Date().getSeconds();
         let idleTime = new Date(timeForIdle - timepassed)
@@ -73,6 +82,10 @@ class World {
         else { this.backgroundSound.pause() };
     }
 
+    /**
+     * This function checks for collisions between the game character and enemies, and performs actions
+     * based on the type of collision.
+     */
     checkCollisions() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isColliding(enemy)) {
@@ -89,6 +102,12 @@ class World {
         });
     }
 
+    /**
+     * The function randomly drops one of three items (healthy heart, salsa bottle, or coins) when an
+     * enemy is defeated in a game level.
+     * @param enemy - The enemy parameter is an object representing the enemy that is defeated and will
+     * drop an item.
+     */
     dropItem(enemy) {
         let healthyHeart = new HealthyHeart(enemy.x + 30);
         let salsa = new SalsaBottle(enemy.x + 30, 360);
@@ -104,6 +123,10 @@ class World {
         }
     }
 
+    /**
+     * The function moves the big boss character to the left if it reaches a certain point on the
+     * screen.
+     */
     alertBigBoss() {
         if (this.character.x + this.character.width > 2000 && this.level.bigBoss[0].life == true) {
             this.level.bigBoss[0].moveLeft();
@@ -225,6 +248,14 @@ class World {
         }
     }
 
+    /**
+     * The function increases the height and width of a given status bar element by 10 and then
+     * decreases it back to its original size after 300 milliseconds.
+     * @param statusbar - The statusbar parameter is an object that represents the status bar element
+     * in the user interface. The function setHooverEffect() is designed to add a hover effect to the
+     * status bar by increasing its height and width by 10 pixels and then decreasing it back to its
+     * original size after 300 milliseconds.
+     */
     setHooverEffect(statusbar) {
         statusbar.height += 10;
         statusbar.width += 10;
@@ -235,6 +266,10 @@ class World {
     }
 
 
+    /**
+     * The function clears the canvas, translates the camera, renders objects, and requests animation
+     * frames for continuous drawing.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -248,12 +283,24 @@ class World {
         });
     }
 
+    /**
+     * The function adds multiple objects to a map.
+     * @param objects - an array of objects that need to be added to a map. The function iterates
+     * through each object in the array and calls the `addToMap` method to add it to the map.
+     */
     addObjectsToMap(objects) {
         objects.forEach(object => {
             this.addToMap(object);
         })
     }
 
+    /**
+     * The function adds a movable object to a map and flips its image if necessary.
+     * @param MovableObject - MovableObject is an object that represents a movable entity in the code.
+     * It could be a character, a vehicle, or any other object that can move around in the game or
+     * application. The function `addToMap` takes this object as a parameter and performs some
+     * operations on it, such as flipping
+     */
     addToMap(MovableObject) {
         if (MovableObject.otherDirection) {
             this.flipImage(MovableObject);
@@ -292,6 +339,13 @@ class World {
         this.addObjectsToMap(this.level.healthyHeart);
     }
 
+    /**
+     * The flipImage function flips an image horizontally and updates its position.
+     * @param MovableObject - MovableObject is an object that has properties such as width and x, and
+     * is being passed as a parameter to the flipImage function. The function uses the canvas context
+     * (this.ctx) to flip the image horizontally by translating it to the right edge of the canvas and
+     * then scaling it by -1
+     */
     flipImage(MovableObject) {
         this.ctx.save();
         this.ctx.translate(MovableObject.width, 0);
@@ -299,6 +353,13 @@ class World {
         MovableObject.x = MovableObject.x * -1;
     }
 
+    /**
+     * The function flips an image back horizontally and restores the canvas context.
+     * @param MovableObject - MovableObject is an object that has an x property representing its
+     * horizontal position on the canvas. The flipImageBack function takes this object as a parameter
+     * and flips it horizontally by multiplying its x value by -1. It also restores the canvas context
+     * to its previous state.
+     */
     flipImageBack(MovableObject) {
         MovableObject.x = MovableObject.x * -1;
         this.ctx.restore();

@@ -1,3 +1,5 @@
+/* The Endboss class defines the properties and methods for the final boss character in a game,
+including animations and collision detection. */
 class Endboss extends MovableObject {
     height = 450;
     width = 400;

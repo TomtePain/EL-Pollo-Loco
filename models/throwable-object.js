@@ -1,3 +1,5 @@
+/* The ThrowableObject class represents a throwable object in a game, with images for rotation and
+splashing upon impact. */
 class ThrowableObject extends MovableObject {
 
     Images_Splashed = [
@@ -30,6 +32,10 @@ class ThrowableObject extends MovableObject {
         this.animate();
     }
 
+    /**
+     * This function throws a bottle and applies gravity to it, causing it to move and potentially
+     * splash on the ground.
+     */
     throw() {
         world.bottleOnGround = false;
         this.speedY = 10;

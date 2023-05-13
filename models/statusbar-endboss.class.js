@@ -1,3 +1,5 @@
+/* The Statusbar_Endboss class creates a movable object that displays a health bar for an end boss with
+different images based on the percentage of health remaining. */
 class Statusbar_Endboss extends MovableObject {
     y = 5;
     speed = 10;

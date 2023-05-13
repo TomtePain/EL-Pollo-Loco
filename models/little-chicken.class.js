@@ -1,3 +1,5 @@
+/* The LittleChicken class extends the MovableObject class and creates a small chicken object that
+moves left and has walking and dead images. */
 class LittleChicken extends MovableObject {
     y = 370;
     height = 60;

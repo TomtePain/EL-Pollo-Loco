@@ -8,6 +8,10 @@ let timeForIdle;
 let gameLoaded = false;
 let audioActive = true;
 
+/**
+ * The function initializes the game by hiding the start screen, adding touch buttons, creating a
+ * canvas, initializing the game world, and setting a flag for game loaded.
+ */
 function init() {
     document.getElementById('StartScreen').classList.add('d-none');
     addTouchButtons();
@@ -18,10 +22,18 @@ function init() {
     touchBtns();
 }
 
+/**
+ * The function adds touch buttons to the webpage.
+ */
 function addTouchButtons() {
     document.getElementById('btn-section').classList.remove('d-none');
 }
 
+/* This code adds an event listener to the window object that listens for keydown events. When a
+keydown event occurs, the code checks which key was pressed using the keyCode property of the event
+object. Depending on the key pressed, it sets the corresponding property of the keyboard object to
+true and records the current time in seconds using the Date() object. This is used to track how long
+a key has been held down. */
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 39) {
         keyboard.right = true;
@@ -49,6 +61,11 @@ window.addEventListener("keydown", (e) => {
     }
 }, false);
 
+/* This code adds an event listener to the window object that listens for keyup events. When a keyup
+event occurs, the code checks which key was released using the keyCode property of the event object.
+Depending on the key released, it sets the corresponding property of the keyboard object to false
+and sets the keypress flag to false for the "d" key. This is used to track when the "d" key has been
+released. */
 window.addEventListener("keyup", (e) => {
     if (e.keyCode == 39) {
         keyboard.right = false;
@@ -71,6 +88,9 @@ window.addEventListener("keyup", (e) => {
     }
 });
 
+/**
+ * The function "touchBtns" calls several other functions related to touch buttons and sound icons.
+ */
 function touchBtns() {
     touchBtnRight();
     touchBtnLeft();
@@ -80,6 +100,10 @@ function touchBtns() {
 }
 
 
+/**
+ * This function adds touch event listeners to a button element and sets a boolean value for the
+ * "right" key in a keyboard object.
+ */
 function touchBtnRight() {
     document.getElementById('btn-right').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -93,6 +117,10 @@ function touchBtnRight() {
     });
 }
 
+/**
+ * This function adds touch event listeners to a button element and sets a boolean value for the
+ * "left" key in a keyboard object.
+ */
 function touchBtnLeft() {
     document.getElementById('btn-left').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -106,6 +134,10 @@ function touchBtnLeft() {
     });
 }
 
+/**
+ * This function adds touch event listeners to a button element and sets a boolean value for the
+ * "up" key in a keyboard object.
+ */
 function touchBtnUp() {
     document.getElementById('btn-up').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -119,6 +151,10 @@ function touchBtnUp() {
     });
 }
 
+/**
+ * This function adds touch event listeners to a button element and sets a boolean value for the
+ * "d" key in a keyboard object.
+ */
 function touchBtnthrow() {
     document.getElementById('btn-throw').addEventListener('touchstart', (e) => {
         e.preventDefault();
@@ -133,6 +169,10 @@ function touchBtnthrow() {
     });
 }
 
+/**
+ * The function adds a touch event listener to a sound icon button and sets the audio mode when
+ * touched.
+ */
 function touchSoundIcon() {
     document.getElementById('btn-sound').addEventListener('touchstart', (e) => {
         setAudioMode();
@@ -141,6 +181,9 @@ function touchSoundIcon() {
 }
 
 
+/**
+ * The function stops the game by clearing all intervals and pausing the background sound.
+ */
 function stopGame() {
     clearAllIntervals();
     world.backgroundSound.pause();
@@ -151,6 +194,9 @@ function clearAllIntervals() {
 };
 
 
+/**
+ * The function sets the audio icon and sound touch based on whether audio is active or not.
+ */
 function setAudioIcon() {
     let audioIcon = document.getElementById('audio-icon');
     let soundTouch = document.getElementById('btn-sound');
@@ -163,6 +209,9 @@ function setAudioIcon() {
     }
 }
 
+/**
+ * The function toggles the audioActive variable and updates the audio icon accordingly.
+ */
 function setAudioMode() {
     if(audioActive == true) {
         audioActive = false;
@@ -172,6 +221,10 @@ function setAudioMode() {
     setAudioIcon();
 }
 
+/**
+ * The function displays a game over screen with an image if the character is dead and stops the game
+ * after a delay.
+ */
 function gameOver() {
     let end = document.getElementById('end-screen');
     let img = document.getElementById('end-screen-img');

@@ -1,3 +1,5 @@
+/* The Statusbar class is a DrawableObject that displays a health bar with different images based on
+the percentage of health remaining. */
 class Statusbar extends DrawableObject {
 
     width = 150;

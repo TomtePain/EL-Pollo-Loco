@@ -1,3 +1,5 @@
+/* The Coin class creates a movable object that displays and animates images of coins and plays a sound
+when collected. */
 class Coin extends MovableObject {
 
     Images_coins = [

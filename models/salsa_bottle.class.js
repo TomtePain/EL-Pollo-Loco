@@ -1,3 +1,5 @@
+/* The SalsaBottle class extends the MovableObject class and represents a salsa bottle object with a
+specific image and dimensions. */
 class SalsaBottle extends MovableObject{
 
 bottle_drop_sound = new Audio('audio/bottle-drop.mp3')

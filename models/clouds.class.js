@@ -1,3 +1,4 @@
+/* The Clouds class creates a movable object that animates by moving left at a constant speed. */
 class Clouds extends MovableObject {
     y = 25;
     width = 500;

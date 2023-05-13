@@ -1,3 +1,5 @@
+/* The HealthyHeart class extends the MovableObject class and represents a health icon with a heal
+sound. */
 class HealthyHeart extends MovableObject {
 
 heal_sound = new Audio('audio/heal.mp3');

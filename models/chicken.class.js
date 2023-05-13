@@ -1,3 +1,5 @@
+/* This is a class for a chicken object that extends a movable object and has walking and dead images,
+as well as a sound effect and randomized speed and position. */
 class Chicken extends MovableObject {
     y = 350;
     height = 80;

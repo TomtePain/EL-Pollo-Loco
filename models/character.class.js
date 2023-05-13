@@ -1,3 +1,4 @@
+/* The Character class defines a movable game character with various animations and movement methods. */
 class Character extends MovableObject {
     y = 115;
     height = 320;
@@ -102,6 +103,10 @@ class Character extends MovableObject {
         return this.world.idle == true
     }
 
+   /**
+    * This function moves an object to the right if the right arrow key is pressed and the object is
+    * not at the end of the level.
+    */
     moveRight() {
         if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
             if (this.moving == true) {
@@ -112,6 +117,10 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * The function moves an object to the left if the left arrow key is pressed and the object is not
+     * at the left edge of the screen.
+     */
     moveLeft() {
         if (this.world.keyboard.left && this.x > 0) {
             if (this.moving == true) {
@@ -122,6 +131,10 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * The function checks if the up arrow or spacebar is pressed and the character is not already in
+     * the air, and if so, it calls the jump function.
+     */
     jump() {
         if (this.world.keyboard.up && !this.isAboveGround() || this.world.keyboard.space && !this.isAboveGround()) {
             if (this.moving == true) {
@@ -130,6 +143,11 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * The function continuously moves a character in a game while also adjusting the camera position.
+     * @returns A setInterval function that calls several methods (moveRight, moveLeft, jump) and
+     * updates the camera position every 1/60th of a second.
+     */
     movingCharacter() {
         return (
             setInterval(() => {
@@ -142,6 +160,11 @@ class Character extends MovableObject {
         )
     }
 
+    /**
+     * The function handles the animations of a character based on its state and keyboard input.
+     * @returns A setInterval function that checks the character's state and plays the appropriate
+     * animation based on that state.
+     */
     movingCharacterAnimations() {
         return (
             setInterval(() => {
@@ -154,7 +177,7 @@ class Character extends MovableObject {
                 } else if (this.isAboveGround()) {
                     this.playAnimations(this.Images_Jumping);
                 } else {
-                    if (this.world.keyboard.right || this.world.keyboard.left) {
+                    if (this.world.keyboard.right || this.world.keyboard.left) { 
                         if (this.moving == true) this.playAnimations(this.Images_Walking);
                     }
                 }
@@ -162,6 +185,11 @@ class Character extends MovableObject {
         )
     }
 
+    /**
+     * This function controls the idle animations of a character in a game based on keyboard inputs and
+     * game conditions.
+     * @returns A setInterval function is being returned.
+     */
     idleCharacterAnimations() {
         return (
             setInterval(() => {
