@@ -25,6 +25,9 @@ class Statusbar_Coin extends DrawableObject {
         this.percentage = percentage;
         let imagePath = this.Images_Coins[this.resolveImageIndex()];
         this.img = this.imageCache[imagePath];
+        if(this.percentage > 50) {
+            this.loadImg(`img_pollo_locco/7_statusbars/1_statusbar/1_statusbar_coin/orange/coin/${this.percentage}.png`)
+        }
     }
 
     resolveImageIndex() {
