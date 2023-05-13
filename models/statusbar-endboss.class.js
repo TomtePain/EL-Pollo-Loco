@@ -3,9 +3,6 @@ different images based on the percentage of health remaining. */
 class Statusbar_Endboss extends MovableObject {
     y = 5;
     speed = 10;
-
-
-    // for selfmade Images = height= 145, y = 4
     Images_Health = [
         'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/0.png',
         'img_pollo_locco/7_statusbars/2_statusbar_endboss/orangeBar/20.png',

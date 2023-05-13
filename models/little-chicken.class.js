@@ -34,6 +34,5 @@ class LittleChicken extends MovableObject {
         setInterval(() => {
             this.playAnimations(this.Images_Walking);
         }, 200);
-
     }
 }

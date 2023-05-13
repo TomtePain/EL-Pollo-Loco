@@ -1,8 +1,6 @@
 /* The Statusbar_Coin class is a drawable object that represents a coin status bar with different
 images based on the percentage filled. */
 class Statusbar_Coin extends DrawableObject {
-
-
     width = 150;
     height = 40;
 
@@ -47,6 +45,4 @@ class Statusbar_Coin extends DrawableObject {
             return 0;
         }
     }
-
-
 }

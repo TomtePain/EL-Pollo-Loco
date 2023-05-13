@@ -75,8 +75,6 @@ class Character extends MovableObject {
         'img_pollo_locco/2_character_pepe/5_dead/D-57.png'
     ];
 
-
-
     world;
     walking_sound = new Audio('audio/running.mp3');
     hit_sound = new Audio('audio/hit.mp3');

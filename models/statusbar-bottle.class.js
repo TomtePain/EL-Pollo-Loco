@@ -1,7 +1,6 @@
 /* The Statusbar_Bottle class is a DrawableObject that represents a bottle-shaped status bar with
 different images based on the percentage filled. */
 class Statusbar_Bottle extends DrawableObject {
-
     width = 150;
     height = 40;
 
@@ -16,7 +15,6 @@ class Statusbar_Bottle extends DrawableObject {
 
     percentage = 0;
     
-
     constructor() {
         super();
         this.loadImages(this.Images_Bottle);
