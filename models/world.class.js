@@ -2,7 +2,6 @@ class World {
     character = new Character();
     bigboss = new Endboss();
     backgroundSound = new Audio('audio/background.mp3');
-    // canvas.requestFullscreen;
     level = level1;
     canvas;
     ctx;
