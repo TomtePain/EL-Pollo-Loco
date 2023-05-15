@@ -101,15 +101,15 @@ class Character extends MovableObject {
         return this.world.idle == true
     }
 
-   /**
-    * This function moves an object to the right if the right arrow key is pressed and the object is
-    * not at the end of the level.
-    */
+    /**
+     * This function moves an object to the right if the right arrow key is pressed and the object is
+     * not at the end of the level.
+     */
     moveRight() {
         if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
             if (this.moving == true) {
                 super.moveRight();
-                if(audioActive == true){this.walking_sound.play()};
+                if (audioActive == true) { this.walking_sound.play() };
                 this.otherDirection = false;
             }
         }
@@ -123,7 +123,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.left && this.x > 0) {
             if (this.moving == true) {
                 super.moveLeft();
-                if(audioActive == true){this.walking_sound.play()};
+                if (audioActive == true) { this.walking_sound.play() };
                 this.otherDirection = true;
             }
         }
@@ -175,7 +175,7 @@ class Character extends MovableObject {
                 } else if (this.isAboveGround()) {
                     this.playAnimations(this.Images_Jumping);
                 } else {
-                    if (this.world.keyboard.right || this.world.keyboard.left) { 
+                    if (this.world.keyboard.right || this.world.keyboard.left) {
                         if (this.moving == true) this.playAnimations(this.Images_Walking);
                     }
                 }
@@ -191,9 +191,9 @@ class Character extends MovableObject {
     idleCharacterAnimations() {
         return (
             setInterval(() => {
-                if (!this.isDead() || !this.isHurt() || !this.isAboveGround() && !this.world.keyboard.right || !this.world.keyboard.left) {
-                    if (this.world.keyboard.right || this.world.keyboard.left) {
-                    } else if (this.world.friedChicken == true) {
+                if (!this.isDead() || !this.isHurt() || !this.isAboveGround()) {
+                    if (this.world.keyboard.right || this.world.keyboard.left) { return false }
+                    else if (this.world.friedChicken) {
                         this.loadImg(this.Images_Jumping[3]);
                         this.moving = false;
                         gameOver();

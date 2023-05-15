@@ -197,9 +197,18 @@ canvas {
 }
 
 @media only screen and (max-width: 720px) {
-    #StartScreen, canvas, #end-screen, .content, .start-btn-container {
+    #StartScreen, #end-screen, .content, .start-btn-container {
         width: 100%;
         top: unset;
+    }
+
+    canvas {
+        width: 100%;
+        top: 150px;
+    }
+
+    #StartScreen img {
+        object-fit: contain;
     }
 
     #headline {

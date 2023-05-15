@@ -115,15 +115,13 @@ class Endboss extends MovableObject {
     }
 
     friedChicken() {
-        if (world.friedChicken == true) {
+        if (world.friedChicken) {
             this.y = 150;
             this.x = world.character.x + 20;
         } else {
-            setTimeout(() => {
-                this.width = 80;
-                this.height = 80;
-                this.y = 350;
-            }, 100);
+            this.width = 80;
+            this.height = 80;
+            this.y = 350;
         }
     }
 }
